@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:food_delivery_app/features/garden/controllers/time_controller.dart';
+import 'package:smart_garden_app/features/garden/controllers/time_controller.dart';
 
 class CustomTimePicker extends StatelessWidget {
   final TimeController controller;

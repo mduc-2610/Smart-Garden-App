@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:food_delivery_app/features/garden/models/garden/plant.dart';
+import 'package:smart_garden_app/features/garden/models/Plant.dart';
 
 class SlideshowController extends GetxController {
   final plants = <Plant>[].obs;

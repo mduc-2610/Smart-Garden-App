@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_app/common/widgets/cards/circle_icon_card.dart';
-import 'package:food_delivery_app/utils/constants/colors.dart';
-import 'package:food_delivery_app/utils/constants/sizes.dart';
-import 'package:food_delivery_app/utils/device/device_utility.dart';
+import 'package:smart_garden_app/common/widgets/cards/circle_icon_card.dart';
+import 'package:smart_garden_app/utils/constants/colors.dart';
+import 'package:smart_garden_app/utils/constants/sizes.dart';
+import 'package:smart_garden_app/utils/device/device_utility.dart';
 import 'package:get/get.dart';
 
 class CSliverAppBar extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_app/common/widgets/buttons/main_button.dart';
-import 'package:food_delivery_app/utils/constants/sizes.dart';
+import 'package:smart_garden_app/common/widgets/buttons/main_button.dart';
+import 'package:smart_garden_app/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 
 Future<void> showSuccessDialog(

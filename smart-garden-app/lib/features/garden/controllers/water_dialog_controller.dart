@@ -1,4 +1,4 @@
-import 'package:food_delivery_app/features/garden/controllers/time_controller.dart';
+import 'package:smart_garden_app/features/garden/controllers/time_controller.dart';
 import 'package:get/get.dart';
 
 class WaterCustomizeController extends GetxController {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:food_delivery_app/utils/constants/colors.dart';
-import 'package:food_delivery_app/utils/constants/sizes.dart';
-import 'package:food_delivery_app/utils/device/device_utility.dart';
+import 'package:smart_garden_app/utils/constants/colors.dart';
+import 'package:smart_garden_app/utils/constants/sizes.dart';
+import 'package:smart_garden_app/utils/device/device_utility.dart';
 
 class MainButton extends StatelessWidget {
   final double? width;

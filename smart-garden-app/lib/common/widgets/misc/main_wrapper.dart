@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_app/utils/constants/sizes.dart';
-import 'package:food_delivery_app/utils/device/device_utility.dart';
-import 'package:food_delivery_app/utils/device/device_utility.dart';
+import 'package:smart_garden_app/utils/constants/sizes.dart';
+import 'package:smart_garden_app/utils/device/device_utility.dart';
+import 'package:smart_garden_app/utils/device/device_utility.dart';
 
 class MainWrapper extends StatelessWidget {
   final Widget child;

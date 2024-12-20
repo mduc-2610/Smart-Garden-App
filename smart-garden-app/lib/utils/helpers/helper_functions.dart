@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart' as dio;
-import 'package:food_delivery_app/utils/constants/image_strings.dart';
+import 'package:smart_garden_app/utils/constants/image_strings.dart';
 import 'package:http_parser/http_parser.dart';
-import 'package:food_delivery_app/common/widgets/bars/snack_bar.dart';
-import 'package:food_delivery_app/data/services/reflect.dart';
-import 'package:food_delivery_app/utils/constants/enums.dart';
+import 'package:smart_garden_app/common/widgets/bars/snack_bar.dart';
+import 'package:smart_garden_app/data/services/reflect.dart';
+import 'package:smart_garden_app/utils/constants/enums.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';

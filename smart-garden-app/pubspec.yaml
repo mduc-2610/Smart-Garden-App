@@ -1,4 +1,4 @@
-name: food_delivery_app
+name: smart_garden_app
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -37,6 +37,7 @@ dependencies:
   carousel_slider: ^4.2.1
   flutter_emoji: ^2.5.1
 #  flutter_swiper: ^1.1.6
+  syncfusion_flutter_charts: ^28.1.33
 
   # Utility packages
   http: ^1.1.0

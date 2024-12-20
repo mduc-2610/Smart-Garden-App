@@ -1,4 +1,4 @@
-# food_delivery_app
+# smart_garden_app
 
 A new Flutter project.
 

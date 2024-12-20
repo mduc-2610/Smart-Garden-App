@@ -1,8 +1,8 @@
 import "package:flutter/material.dart";
-import "package:food_delivery_app/common/widgets/bars/menu_bar.dart";
-import "package:food_delivery_app/features/garden/views/dashboard.dart";
-import "package:food_delivery_app/features/garden/views/garden.dart";
-import "package:food_delivery_app/features/setting/views/setting.dart";
+import "package:smart_garden_app/common/widgets/bars/menu_bar.dart";
+import "package:smart_garden_app/features/garden/views/dashboard.dart";
+import "package:smart_garden_app/features/garden/views/garden.dart";
+import "package:smart_garden_app/features/setting/views/setting.dart";
 import "package:get/get.dart";
 
 class GardenMenuRedirection extends StatelessWidget {

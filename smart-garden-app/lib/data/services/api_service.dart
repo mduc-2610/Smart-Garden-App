@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
-import 'package:food_delivery_app/data/services/reflect.dart';
-import 'package:food_delivery_app/features/authentication/models/auth/token.dart';
-import 'package:food_delivery_app/utils/constants/api_constants.dart';
-import 'package:food_delivery_app/data/services/token_service.dart';
-import 'package:food_delivery_app/utils/helpers/helper_functions.dart';
+import 'package:smart_garden_app/data/services/reflect.dart';
+import 'package:smart_garden_app/features/authentication/models/auth/token.dart';
+import 'package:smart_garden_app/utils/constants/api_constants.dart';
+import 'package:smart_garden_app/data/services/token_service.dart';
+import 'package:smart_garden_app/utils/helpers/helper_functions.dart';
 import 'package:http/http.dart' as http;
 import 'package:reflectable/reflectable.dart';
 import 'package:get/get.dart';
@@ -78,7 +78,7 @@ class APIService<T> {
   Future<dynamic> list({ bool next = false, pagination = true, single = false }) async {
     return _handleRequest<dynamic>((Token? token) async {
       final url_ = url();
-      $print(url_);
+      $print("URL: $url_");
       if (dio != null) {
         final response = await dio!.get(
           url_,
@@ -86,11 +86,11 @@ class APIService<T> {
         );
         return _handleResponse(response.data, response.statusCode, next: next, pagination: pagination, single: single);
       } else {
+        $print("Response before ");
         final response = await http.get(
           Uri.parse(url_),
           headers: await _getHeaders(token),
         );
-
         return _handleResponse(decodeMessage(response), response.statusCode, next: next, pagination: pagination, single: single);
       }
     });
@@ -247,13 +247,18 @@ class APIService<T> {
 
   Future<R> _handleRequest<R>(Future<R> Function(Token?) request) async {
     Token? token;
-    try {
-      token = await TokenService.getToken();
+    if(allNoBearer) {
       return await request(token);
-    } catch (e) {
-      await refreshToken();
-      token = await TokenService.getToken();
-      return await request(token);
+    }
+    else {
+      try {
+        token = await TokenService.getToken();
+        return await request(token);
+      } catch (e) {
+        await refreshToken();
+        token = await TokenService.getToken();
+        return await request(token);
+      }
     }
   }
 
@@ -317,8 +322,8 @@ class APIService<T> {
         jsonResponse = jsonResponse["results"];
       }
 
-      var paginatedResult = (jsonResponse as List).map((instance) => fromJson(instance)).toList();
 
+      var paginatedResult = (jsonResponse as List).map((instance) => fromJson(instance)).toList();
       if (next) {
         var paginationInfo = responseData["pagination"] ?? {};
         return [paginatedResult, paginationInfo];

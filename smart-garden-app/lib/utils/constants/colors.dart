@@ -9,6 +9,23 @@ class TColor {
   static const Color primary = Color(0xff3dada9);
   static const Color secondary = Color(0xfffbc972);
   static const Color accent = Color(0xFF4b68ff);
+  static Color get disabled {
+    final brightness = WidgetsBinding.instance.window.platformBrightness;
+    if (brightness == Brightness.dark) {
+      return const Color(0xFF616161);
+    } else {
+      return const Color(0xFFBDBDBD);
+    }
+  }
+
+  static Color get bulbOffColor {
+    final brightness = WidgetsBinding.instance.window.platformBrightness;
+    if (brightness == Brightness.dark) {
+      return const Color(0xFF757575);
+    } else {
+      return const Color(0xFFE0E0E0);
+    }
+  }
 
   static const Color star = Colors.amber;
 

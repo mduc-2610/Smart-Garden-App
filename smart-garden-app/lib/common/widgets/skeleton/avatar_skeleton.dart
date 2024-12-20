@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_app/common/widgets/skeleton/box_skeleton.dart';
-import 'package:food_delivery_app/utils/constants/sizes.dart';
+import 'package:smart_garden_app/common/widgets/skeleton/box_skeleton.dart';
+import 'package:smart_garden_app/utils/constants/sizes.dart';
 import 'package:shimmer/shimmer.dart';
 
 class AvatarSkeleton extends StatelessWidget {

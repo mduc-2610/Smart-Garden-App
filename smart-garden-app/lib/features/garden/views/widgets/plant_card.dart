@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_app/features/garden/views/plant_detail.dart';
+import 'package:smart_garden_app/features/garden/models/Plant.dart';
+import 'package:smart_garden_app/features/garden/views/plant_detail.dart';
 import 'package:get/get.dart';
-import 'package:food_delivery_app/features/garden/models/garden/plant.dart';
-import 'package:food_delivery_app/utils/constants/colors.dart';
-import 'package:food_delivery_app/utils/constants/sizes.dart';
+import 'package:smart_garden_app/utils/constants/colors.dart';
+import 'package:smart_garden_app/utils/constants/image_strings.dart';
+import 'package:smart_garden_app/utils/constants/sizes.dart';
 
 class PlantCard extends StatelessWidget {
   final Plant plant;
@@ -51,7 +52,7 @@ class PlantCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        plant.name,
+                        "${plant?.name}",
                         style: Get.theme.textTheme.headlineMedium?.copyWith(
                           color: Color(0xff577943),
                         ),
@@ -59,7 +60,7 @@ class PlantCard extends StatelessWidget {
                       ),
                       SizedBox(height: TSize.spaceBetweenItemsSm),
                       Text(
-                        '${plant.plantDays} days',
+                        '5 days',
                         style: Get.theme.textTheme.titleLarge?.copyWith(
                           color: determineTextColor().withOpacity(0.7),
                         ),
@@ -71,7 +72,7 @@ class PlantCard extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(TSize.borderRadiusLg),
                     child: Image.asset(
-                      plant.imageUrl,
+                      "${plant.imageUrl ?? TImage.plant1}",
                       fit: BoxFit.cover,
                     ),
                   ),

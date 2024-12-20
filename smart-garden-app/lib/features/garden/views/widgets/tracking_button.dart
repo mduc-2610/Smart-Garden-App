@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:food_delivery_app/utils/constants/sizes.dart';
-import 'package:food_delivery_app/utils/constants/sizes.dart';
+import 'package:smart_garden_app/utils/constants/sizes.dart';
+import 'package:smart_garden_app/utils/constants/sizes.dart';
 
 class TrackingWidget extends StatelessWidget {
   final String topText;

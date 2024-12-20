@@ -1,4 +1,4 @@
-import 'package:food_delivery_app/utils/helpers/helper_functions.dart';
+import 'package:smart_garden_app/utils/helpers/helper_functions.dart';
 import 'package:get/get.dart';
 
 class FilterBarController extends GetxController {

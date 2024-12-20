@@ -1,5 +1,5 @@
 
-import 'package:food_delivery_app/utils/helpers/helper_functions.dart';
+import 'package:smart_garden_app/utils/helpers/helper_functions.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ImagePickerService {

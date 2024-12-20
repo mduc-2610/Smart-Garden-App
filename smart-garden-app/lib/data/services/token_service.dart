@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:food_delivery_app/features/authentication/models/auth/token.dart';
+import 'package:smart_garden_app/features/authentication/models/auth/token.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class TokenService {

@@ -1,6 +1,11 @@
 
 import 'dart:io';
-import 'package:food_delivery_app/utils/helpers/helper_functions.dart';
+import 'package:smart_garden_app/features/garden/models/Dht11.dart';
+import 'package:smart_garden_app/features/garden/models/Dht11.dart';
+import 'package:smart_garden_app/features/garden/models/Light.dart';
+import 'package:smart_garden_app/features/garden/models/Moisture.dart';
+import 'package:smart_garden_app/features/garden/models/Plant.dart';
+import 'package:smart_garden_app/utils/helpers/helper_functions.dart';
 
 Future<String> getLocalIpAddress() async {
   try {
@@ -27,12 +32,15 @@ Future<String> getLocalIpAddress() async {
 class APIConstant {
   // static const String ip = "192.168.1.71";
   static const String ip = "10.20.150.220";
+  static const String esp32Ip = "192.168.0.103";
   static const String tSecretAPIKey = "";
   // static const baseUrl = 'http://10.0.2.2:8000/api';
   // static const baseUrl = 'http://192.168.1.8:8000/api'; // VANSAU
   // static const baseUrl = 'http://192.168.1.5:8000/api'; // VANSAU
   // static const baseUrl = 'http://192.168.0.103:8000/api'; // Tenda
   static const baseUrl = 'http://$ip:8000/api'; // Minh Duc 5g
+  static const String baseEsp32Url = "http://$esp32Ip/api/esp";
+  static const String baseCSUrl = "https://8zdnvn-3000.csb.app/api";
   static const baseSocketUrl = 'ws://${APIConstant.ip}:8000/ws';
 
   // static Future<String> get ip async => await getLocalIpAddress();
@@ -50,6 +58,16 @@ class APIConstant {
 
   static String? getEndpointFor<T>() {
     switch (T) {
+      case Dht11:
+        return 'dht11';
+      case Light:
+        return 'light';
+      case Plant:
+        return 'plant';
+      case Moisture:
+        return 'moisture';
+      default:
+        return 'valve';
       ///AUTHENTICATION
       // case LoginPassword:
       //   return 'account/user/login-password';

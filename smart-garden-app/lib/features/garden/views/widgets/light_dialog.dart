@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
-import 'package:food_delivery_app/features/garden/controllers/light_dialog_controller.dart';
-import 'package:food_delivery_app/features/garden/controllers/water_dialog_controller.dart';
-import 'package:food_delivery_app/features/garden/views/widgets/custom_time_picker.dart';
-import 'package:food_delivery_app/features/garden/views/widgets/water_dialog.dart';
+import 'package:smart_garden_app/features/garden/controllers/light_dialog_controller.dart';
+import 'package:smart_garden_app/features/garden/controllers/water_dialog_controller.dart';
+import 'package:smart_garden_app/features/garden/views/widgets/custom_time_picker.dart';
+import 'package:smart_garden_app/features/garden/views/widgets/water_dialog.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:food_delivery_app/common/widgets/buttons/small_button.dart';
-import 'package:food_delivery_app/utils/constants/sizes.dart';
-import 'package:food_delivery_app/utils/helpers/helper_functions.dart';
+import 'package:smart_garden_app/common/widgets/buttons/small_button.dart';
+import 'package:smart_garden_app/utils/constants/sizes.dart';
+import 'package:smart_garden_app/utils/helpers/helper_functions.dart';
 
 class LightDialog extends StatefulWidget {
   @override

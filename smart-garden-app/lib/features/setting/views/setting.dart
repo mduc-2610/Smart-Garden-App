@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_app/common/widgets/misc/main_wrapper.dart';
-import 'package:food_delivery_app/features/setting/controllers/setting_controller.dart';
-import 'package:food_delivery_app/utils/constants/colors.dart';
-import 'package:food_delivery_app/utils/constants/sizes.dart';
+import 'package:smart_garden_app/common/widgets/misc/main_wrapper.dart';
+import 'package:smart_garden_app/features/setting/controllers/setting_controller.dart';
+import 'package:smart_garden_app/utils/constants/colors.dart';
+import 'package:smart_garden_app/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 
 class AccountSettingsScreen extends StatelessWidget {

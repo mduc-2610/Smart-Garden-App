@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:food_delivery_app/common/widgets/buttons/main_button.dart';
-import 'package:food_delivery_app/common/widgets/misc/main_wrapper.dart';
-import 'package:food_delivery_app/features/onboarding/controllers/onboarding_controller.dart';
-import 'package:food_delivery_app/utils/constants/colors.dart';
-import 'package:food_delivery_app/utils/constants/image_strings.dart';
-import 'package:food_delivery_app/utils/constants/sizes.dart';
-import 'package:food_delivery_app/utils/device/device_utility.dart';
+import 'package:smart_garden_app/common/widgets/buttons/main_button.dart';
+import 'package:smart_garden_app/common/widgets/misc/main_wrapper.dart';
+import 'package:smart_garden_app/features/onboarding/controllers/onboarding_controller.dart';
+import 'package:smart_garden_app/utils/constants/colors.dart';
+import 'package:smart_garden_app/utils/constants/image_strings.dart';
+import 'package:smart_garden_app/utils/constants/sizes.dart';
+import 'package:smart_garden_app/utils/device/device_utility.dart';
 import 'package:get/get.dart';
 
 class OnboardingScreen extends StatelessWidget {

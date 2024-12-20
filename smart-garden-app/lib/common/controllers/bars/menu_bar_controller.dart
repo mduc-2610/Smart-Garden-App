@@ -1,6 +1,6 @@
 
 import 'package:flutter/cupertino.dart';
-import 'package:food_delivery_app/utils/helpers/helper_functions.dart';
+import 'package:smart_garden_app/utils/helpers/helper_functions.dart';
 import 'package:get/get.dart';
 
 class MenuBarController extends GetxController {

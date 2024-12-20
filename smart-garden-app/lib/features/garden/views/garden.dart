@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_app/common/widgets/misc/main_wrapper.dart';
-import 'package:food_delivery_app/features/garden/controllers/garden_controller.dart';
-import 'package:food_delivery_app/features/garden/views/widgets/plant_care_tracker.dart';
-import 'package:food_delivery_app/utils/constants/colors.dart';
-import 'package:food_delivery_app/utils/constants/enums.dart';
+import 'package:smart_garden_app/common/widgets/misc/main_wrapper.dart';
+import 'package:smart_garden_app/features/garden/controllers/garden_controller.dart';
+import 'package:smart_garden_app/features/garden/models/Plant.dart';
+import 'package:smart_garden_app/features/garden/views/widgets/plant_care_tracker.dart';
+import 'package:smart_garden_app/utils/constants/colors.dart';
+import 'package:smart_garden_app/utils/constants/enums.dart';
 
-import 'package:food_delivery_app/utils/constants/image_strings.dart';
-import 'package:food_delivery_app/utils/constants/sizes.dart';
-import 'package:food_delivery_app/utils/device/device_utility.dart';
+import 'package:smart_garden_app/utils/constants/image_strings.dart';
+import 'package:smart_garden_app/utils/constants/sizes.dart';
+import 'package:smart_garden_app/utils/device/device_utility.dart';
 import 'package:get/get.dart';
-import 'package:food_delivery_app/features/garden/models/garden/plant.dart';
-import 'package:food_delivery_app/features/garden/views/widgets/plant_card.dart';
+import 'package:smart_garden_app/features/garden/views/widgets/plant_card.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class MyGardenView extends StatefulWidget {
@@ -34,20 +34,6 @@ class _MyGardenViewState extends State<MyGardenView> {
       plantDays: 7,
       lightPercentPerDay: 75,
     ),
-    Plant(
-      name: 'Prometheus',
-      imageUrl: TImage.plant1,
-      waterDaysPerWeek: 14,
-      plantDays: 14,
-      lightPercentPerDay: 50,
-    ),
-    Plant(
-      name: 'Convenant',
-      imageUrl: TImage.plant1,
-      waterDaysPerWeek: 5,
-      plantDays: 5,
-      lightPercentPerDay: 85,
-    ),
   ];
   final controller = Get.put(GardenController());
 
@@ -65,33 +51,34 @@ class _MyGardenViewState extends State<MyGardenView> {
       ),
       body: MainWrapper(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(height: TSize.spaceBetweenSections,),
 
-            Obx(() => Row(
-              children: [
-                InkWell(
-                  onTap: controller.changeLayout,
-                  child: Icon(
-                    Icons.crop_square_rounded,
-                    color: (controller.show == ItemLayout.grid)
-                        ? Colors.grey.withOpacity(0.5)
-                        : Colors.black,
-                    size: TSize.iconLg,
-                  ),
-                ),
-                InkWell(
-                  onTap: controller.changeLayout,
-                  child: Icon(
-                    Icons.grid_view,
-                    color: (controller.show == ItemLayout.list)
-                        ? Colors.grey.withOpacity(0.5)
-                        : Colors.black,
-                    size: TSize.iconLg,
-                  ),
-                ),
-              ],
-            ),),
+            // Obx(() => Row(
+            //   children: [
+            //     InkWell(
+            //       onTap: controller.changeLayout,
+            //       child: Icon(
+            //         Icons.crop_square_rounded,
+            //         color: (controller.show == ItemLayout.grid)
+            //             ? Colors.grey.withOpacity(0.5)
+            //             : Colors.black,
+            //         size: TSize.iconLg,
+            //       ),
+            //     ),
+            //     InkWell(
+            //       onTap: controller.changeLayout,
+            //       child: Icon(
+            //         Icons.grid_view,
+            //         color: (controller.show == ItemLayout.list)
+            //             ? Colors.grey.withOpacity(0.5)
+            //             : Colors.black,
+            //         size: TSize.iconLg,
+            //       ),
+            //     ),
+            //   ],
+            // ),),
             SizedBox(height: TSize.spaceBetweenSections,),
 
             Obx(() =>

@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:food_delivery_app/features/garden/models/garden/plant.dart';
-import 'package:food_delivery_app/features/garden/views/widgets/light_dialog.dart';
-import 'package:food_delivery_app/features/garden/views/widgets/tracking_button.dart';
-import 'package:food_delivery_app/features/garden/views/widgets/water_dialog.dart';
-import 'package:food_delivery_app/features/garden/views/widgets/water_dialog.dart';
-import 'package:food_delivery_app/features/garden/views/widgets/water_dialog.dart';
-import 'package:food_delivery_app/utils/constants/sizes.dart';
+import 'package:smart_garden_app/features/garden/models/Plant.dart';
+import 'package:smart_garden_app/features/garden/views/widgets/light_dialog.dart';
+import 'package:smart_garden_app/features/garden/views/widgets/tracking_button.dart';
+import 'package:smart_garden_app/features/garden/views/widgets/water_dialog.dart';
+import 'package:smart_garden_app/features/garden/views/widgets/water_dialog.dart';
+import 'package:smart_garden_app/features/garden/views/widgets/water_dialog.dart';
+import 'package:smart_garden_app/utils/constants/sizes.dart';
 
 class PlantCareTracker extends StatelessWidget {
   final Plant plant;
@@ -39,7 +39,7 @@ class PlantCareTracker extends StatelessWidget {
         topText: 'Water',
         iconData: Icons.water_drop,
         progressColor: Colors.blue,
-        progressValue: 2 / plant.waterDaysPerWeek,
+        progressValue: 2 / (plant?.waterDaysPerWeek ?? 1),
         middleText: '${plant.waterDaysPerWeek} days',
         bottomText: 'every 7 days',
       ),
@@ -54,7 +54,7 @@ class PlantCareTracker extends StatelessWidget {
         topText: 'Light',
         iconData: Icons.light_mode,
         progressColor: Colors.orange,
-        progressValue: plant.lightPercentPerDay / 100,
+        progressValue: (plant?.lightPercentPerDay ??  100) / 100,
         middleText: '${plant.lightPercentPerDay}%',
         bottomText: '18 hours a day',
       ),
@@ -66,10 +66,10 @@ class PlantCareTracker extends StatelessWidget {
         onPressed: () {
           showDialog(context: context, builder: (context) => WaterCustomizeDialog());
         },
-        topText: 'Plant',
+        topText: 'Plant.dart',
         iconData: Icons.eco,
         progressColor: Colors.green,
-        progressValue: plant.plantDays / 30,
+        progressValue: (plant.plantDays ?? 1) / 365,
         middleText: '${plant.plantDays} days',
         bottomText: 'since planting',
       ),

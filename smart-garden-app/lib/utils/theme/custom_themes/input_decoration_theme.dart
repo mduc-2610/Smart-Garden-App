@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_app/utils/constants/colors.dart';
+import 'package:smart_garden_app/utils/constants/colors.dart';
 
 class TInputDecorationTheme {
   TInputDecorationTheme._();
@@ -45,7 +45,7 @@ class TInputDecorationTheme {
     labelStyle: const TextStyle().copyWith(fontSize: 14, color: TColor.inputDarkHintTextColor),
     hintStyle: const TextStyle().copyWith(fontSize: 14, color: TColor.inputDarkHintTextColor),
     errorStyle: const TextStyle().copyWith(fontStyle: FontStyle.normal),
-    floatingLabelStyle: const TextStyle().copyWith(color: Colors.black.withOpacity(0.8)),
+    floatingLabelStyle: const TextStyle().copyWith(color: Colors.white.withOpacity(0.8)),
     border: const OutlineInputBorder().copyWith(
         borderRadius: BorderRadius.circular(14),
         borderSide: const BorderSide(width: 1, color: TColor.inputDarkBorderColor)
