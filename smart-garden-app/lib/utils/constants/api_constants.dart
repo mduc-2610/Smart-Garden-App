@@ -31,7 +31,7 @@ Future<String> getLocalIpAddress() async {
 
 class APIConstant {
   // static const String ip = "192.168.1.71";
-  static const String ip = "10.20.150.220";
+  static const String ip = "192.168.0.104";
   static const String esp32Ip = "192.168.0.103";
   static const String tSecretAPIKey = "";
   // static const baseUrl = 'http://10.0.2.2:8000/api';
@@ -40,7 +40,8 @@ class APIConstant {
   // static const baseUrl = 'http://192.168.0.103:8000/api'; // Tenda
   static const baseUrl = 'http://$ip:8000/api'; // Minh Duc 5g
   static const String baseEsp32Url = "http://$esp32Ip/api/esp";
-  static const String baseCSUrl = "https://8zdnvn-3000.csb.app/api";
+  // static const String baseCSUrl = "https://8zdnvn-3000.csb.app/api";
+  static const String baseCSUrl = 'http://$ip:3000/api';
   static const baseSocketUrl = 'ws://${APIConstant.ip}:8000/ws';
 
   // static Future<String> get ip async => await getLocalIpAddress();

@@ -14,6 +14,8 @@ class Plant {
   final int? waterDaysPerWeek;
   final int? plantDays;
   final int? lightPercentPerDay;
+  final String? startTime;
+  final String? durationTime;
 
   Plant({
     this.id,
@@ -25,6 +27,8 @@ class Plant {
     this.waterDaysPerWeek,
     this.plantDays,
     this.lightPercentPerDay,
+    this.startTime,
+    this.durationTime,
   }) : createdAt = THelperFunction.parseToDateTime(createdAt);
 
   Plant.fromJson(Map<String, dynamic> json)
@@ -36,7 +40,9 @@ class Plant {
         imageUrl = json['image_url'],
         waterDaysPerWeek = json['water_days_per_week'],
         plantDays = json['plant_days'],
-        lightPercentPerDay = json['light_percent_per_day'];
+        lightPercentPerDay = json['light_percent_per_day'],
+        startTime = json['start_time'],
+        durationTime = json['duration_time'];
 
   Map<String, dynamic> toJson({bool patch = false}) {
     final data = {

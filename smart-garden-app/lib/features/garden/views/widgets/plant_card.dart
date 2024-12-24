@@ -32,7 +32,9 @@ class PlantCard extends StatelessWidget {
 
     return InkWell(
       onTap: onPressed ?? () {
-        Get.to(() => PlantDetail(plant: plant));
+        Get.to(() => PlantDetail(), arguments: {
+          "id": plant?.id
+        });
       },
       child: SizedBox(
         width: width,

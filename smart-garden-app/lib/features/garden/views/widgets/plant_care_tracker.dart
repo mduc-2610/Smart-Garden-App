@@ -76,3 +76,39 @@ class PlantCareTracker extends StatelessWidget {
     ];
   }
 }
+class PlantCareTrackerSkeleton extends StatelessWidget {
+  final Axis direction;
+
+  const PlantCareTrackerSkeleton({
+    this.direction = Axis.horizontal,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Flex(
+      direction: direction,
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: _buildTrackingSkeletons(context),
+    );
+  }
+
+  List<Widget> _buildTrackingSkeletons(BuildContext context) {
+    final bool isHorizontal = direction == Axis.horizontal;
+
+    return [
+      TrackingWidgetSkeleton(),
+      SizedBox(
+        width: isHorizontal ? TSize.spaceBetweenItemsXl : 0.0,
+        height: isHorizontal ? 0.0 : TSize.spaceBetweenItemsXl,
+      ),
+      TrackingWidgetSkeleton(),
+      SizedBox(
+        width: isHorizontal ? TSize.spaceBetweenItemsXl : 0.0,
+        height: isHorizontal ? 0.0 : TSize.spaceBetweenItemsXl,
+      ),
+      TrackingWidgetSkeleton(),
+    ];
+  }
+}

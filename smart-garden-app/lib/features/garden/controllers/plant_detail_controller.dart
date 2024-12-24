@@ -2,24 +2,52 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:smart_garden_app/data/services/api_service.dart';
 import 'dart:convert';
 import 'package:smart_garden_app/utils/constants/api_constants.dart';
 import 'package:smart_garden_app/features/garden/models/Plant.dart';
+import 'package:smart_garden_app/utils/constants/times.dart';
+import 'package:smart_garden_app/utils/helpers/helper_functions.dart';
 
 class PlantDetailController extends GetxController {
-  final Plant plant;
   var isOpen = false.obs;
+  var isLoading = true.obs;
   var isValveAuto = true.obs;
   Timer? _timer;
+  var plant = Rx<Plant?>(null);
+  String? plantId;
 
-  PlantDetailController({required this.plant});
+  PlantDetailController();
 
   @override
   void onInit() {
     super.onInit();
+    plantId = Get.arguments['id'];
     fetchValveState();
+    fetchPlantDetails();
     fetchValveAutoState();
     startRealTimeUpdates();
+  }
+
+  Future<void> fetchPlantDetails() async {
+    try {
+      $print("Hello");
+      final response = await APIService<Plant>(
+        fullUrl: '${APIConstant.baseCSUrl}/plant',
+        allNoBearer: true,
+      ).retrieve(plantId!);
+      await Future.delayed(Duration(milliseconds: TTime.init));
+      if (response != null) {
+        plant.value = response;
+      } else {
+        Get.snackbar('Error', 'Failed to load plant data');
+      }
+    } catch (e) {
+      print('Error fetching plant details: $e');
+      Get.snackbar('Error', 'Failed to load plant data');
+    } finally {
+      isLoading.value = false;
+    }
   }
 
   void startRealTimeUpdates() {
@@ -35,7 +63,7 @@ class PlantDetailController extends GetxController {
 
     try {
       final response = await http.post(
-        Uri.parse("${APIConstant.baseEsp32Url}/valve/${plant.id}"),
+        Uri.parse("${APIConstant.baseEsp32Url}/valve/${plant.value?.id}"),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -48,7 +76,6 @@ class PlantDetailController extends GetxController {
         print("Valve state updated successfully");
       } else {
         print('Error toggling valve: ${response.body}');
-        // Revert the state if the request failed
         isOpen.value = !value;
         Get.snackbar(
           'Error',
@@ -82,7 +109,7 @@ class PlantDetailController extends GetxController {
           'Content-Type': 'application/json',
         },
         body: json.encode({
-          'valve_${plant.id}': isValveAuto.value,
+          'valve_${plant.value?.id}': isValveAuto.value,
         }),
       );
 
@@ -90,7 +117,6 @@ class PlantDetailController extends GetxController {
         print("Auto valve state updated successfully");
       } else {
         print('Error toggling auto valve: ${response.body}');
-        // Revert the state if the request failed
         isValveAuto.value = !value;
         Get.snackbar(
           'Error',
@@ -102,7 +128,6 @@ class PlantDetailController extends GetxController {
       }
     } catch (e) {
       print('Error toggling auto valve: $e');
-      // Revert the state if the request failed
       isValveAuto.value = !value;
       Get.snackbar(
         'Error',
@@ -117,7 +142,7 @@ class PlantDetailController extends GetxController {
   Future<void> fetchValveState() async {
     try {
       final response = await http.get(
-          Uri.parse("${APIConstant.baseEsp32Url}/valve/${plant.id}")
+          Uri.parse("${APIConstant.baseEsp32Url}/valve/${plant.value?.id}")
       );
 
       if (response.statusCode == 200) {
@@ -143,8 +168,8 @@ class PlantDetailController extends GetxController {
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body) as Map<String, dynamic>;
-        if (data.containsKey('valve_${plant.id}')) {
-          isValveAuto.value = data['valve_${plant.id}'];
+        if (data.containsKey('valve_${plant.value?.id}')) {
+          isValveAuto.value = data['valve_${plant.value?.id}'];
         } else {
           print('Invalid response structure: $data');
         }

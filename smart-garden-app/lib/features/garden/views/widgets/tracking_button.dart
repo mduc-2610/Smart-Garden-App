@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:smart_garden_app/common/widgets/skeleton/box_skeleton.dart';
 import 'package:smart_garden_app/utils/constants/sizes.dart';
 import 'package:smart_garden_app/utils/constants/sizes.dart';
 
@@ -73,6 +74,52 @@ class TrackingWidget extends StatelessWidget {
           style: Get.theme.textTheme.bodySmall?.copyWith(
             fontSize: TSize.fontSizeMd
           ),
+        ),
+      ],
+    );
+  }
+}
+
+class TrackingWidgetSkeleton extends StatelessWidget {
+  const TrackingWidgetSkeleton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        BoxSkeleton(
+          height: 20,
+          width: 70,
+          borderRadius: TSize.borderRadiusSm,
+        ),
+        SizedBox(height: TSize.spaceBetweenItemsVertical),
+        Stack(
+          alignment: Alignment.center,
+          children: [
+            BoxSkeleton(
+              height: 70,
+              width: 70,
+              borderRadius: TSize.borderRadiusCircle,
+            ),
+            BoxSkeleton(
+              height: 30,
+              width: 30,
+              borderRadius: TSize.borderRadiusCircle,
+            ),
+          ],
+        ),
+        SizedBox(height: TSize.spaceBetweenItemsVertical),
+        BoxSkeleton(
+          height: 15,
+          width: 50,
+          borderRadius: TSize.borderRadiusSm,
+        ),
+        SizedBox(height: TSize.spaceBetweenItemsSm),
+        BoxSkeleton(
+          height: 15,
+          width: 100,
+          borderRadius: TSize.borderRadiusSm,
         ),
       ],
     );

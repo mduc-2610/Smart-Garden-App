@@ -1,40 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:smart_garden_app/common/widgets/misc/main_wrapper.dart';
+import 'package:smart_garden_app/common/widgets/skeleton/box_skeleton.dart';
 import 'package:smart_garden_app/features/garden/controllers/garden_controller.dart';
-import 'package:smart_garden_app/features/garden/models/Plant.dart';
 import 'package:smart_garden_app/features/garden/views/widgets/plant_care_tracker.dart';
-import 'package:smart_garden_app/utils/constants/colors.dart';
-import 'package:smart_garden_app/utils/constants/enums.dart';
-
-import 'package:smart_garden_app/utils/constants/image_strings.dart';
-import 'package:smart_garden_app/utils/constants/sizes.dart';
-import 'package:smart_garden_app/utils/device/device_utility.dart';
-import 'package:get/get.dart';
 import 'package:smart_garden_app/features/garden/views/widgets/plant_card.dart';
+import 'package:smart_garden_app/utils/constants/enums.dart';
+import 'package:smart_garden_app/utils/device/device_utility.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:smart_garden_app/utils/constants/colors.dart';
+import 'package:smart_garden_app/utils/constants/sizes.dart';
+import 'package:get/get.dart';
 
-class MyGardenView extends StatefulWidget {
-  @override
-  _MyGardenViewState createState() => _MyGardenViewState();
-}
-
-class _MyGardenViewState extends State<MyGardenView> {
-  final plants = [
-    Plant(
-      name: 'Ailanthus',
-      imageUrl: TImage.plant1,
-      waterDaysPerWeek: 10,
-      plantDays: 10,
-      lightPercentPerDay: 65,
-    ),
-    Plant(
-      name: 'Excelsa',
-      imageUrl: TImage.plant1,
-      waterDaysPerWeek: 7,
-      plantDays: 7,
-      lightPercentPerDay: 75,
-    ),
-  ];
+class MyGardenView extends StatelessWidget {
   final controller = Get.put(GardenController());
 
   @override
@@ -53,39 +30,16 @@ class _MyGardenViewState extends State<MyGardenView> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: TSize.spaceBetweenSections,),
-
-            // Obx(() => Row(
-            //   children: [
-            //     InkWell(
-            //       onTap: controller.changeLayout,
-            //       child: Icon(
-            //         Icons.crop_square_rounded,
-            //         color: (controller.show == ItemLayout.grid)
-            //             ? Colors.grey.withOpacity(0.5)
-            //             : Colors.black,
-            //         size: TSize.iconLg,
-            //       ),
-            //     ),
-            //     InkWell(
-            //       onTap: controller.changeLayout,
-            //       child: Icon(
-            //         Icons.grid_view,
-            //         color: (controller.show == ItemLayout.list)
-            //             ? Colors.grey.withOpacity(0.5)
-            //             : Colors.black,
-            //         size: TSize.iconLg,
-            //       ),
-            //     ),
-            //   ],
-            // ),),
-            SizedBox(height: TSize.spaceBetweenSections,),
-
-            Obx(() =>
-              (controller.show == ItemLayout.grid)
-                ? buildGrid(context)
-                : buildList(context)
-            ),
+            SizedBox(height: TSize.spaceBetweenSections),
+            Obx(() {
+              if (controller.isLoading.value) {
+                return MyGardenSkeleton(); // Show skeleton while loading
+              } else {
+                return controller.show.value == ItemLayout.grid
+                    ? buildGrid(context)
+                    : buildList(context);
+              }
+            }),
           ],
         ),
       ),
@@ -95,15 +49,15 @@ class _MyGardenViewState extends State<MyGardenView> {
   Widget buildGrid(BuildContext context) {
     return Expanded(
       child: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           crossAxisSpacing: 15,
           mainAxisSpacing: 15,
           childAspectRatio: 0.8,
         ),
-        itemCount: plants.length,
+        itemCount: controller.plants.length,
         itemBuilder: (context, index) {
-          final plant = plants[index];
+          final plant = controller.plants[index];
           return PlantCard(plant: plant);
         },
       ),
@@ -116,42 +70,82 @@ class _MyGardenViewState extends State<MyGardenView> {
         children: [
           SizedBox(
             height: TDeviceUtil.getScreenHeight() * 0.35,
-            child: PageView.builder(
-              controller: controller.pageController,
-              onPageChanged: controller.updatePageIndex,
-              itemCount: plants.length,
-              itemBuilder: (context, index) {
-                final plant = plants[index];
-                return PlantCard(
-                  plant: plant,
-                  background: Colors.transparent,
-                );
-              },
-            ),
+            child: Obx(() {
+              if (controller.plants.isEmpty) {
+                return Center(child: Text('No plants available'));
+              }
+              return PageView.builder(
+                controller: controller.pageController,
+                onPageChanged: controller.updatePageIndex,
+                itemCount: controller.plants.length,
+                itemBuilder: (context, index) {
+                  final plant = controller.plants[index];
+                  return PlantCard(
+                    plant: plant,
+                    background: Colors.transparent,
+                  );
+                },
+              );
+            }),
           ),
           SizedBox(
             height: 20,
             child: SmoothPageIndicator(
-              controller: controller.pageController, // Same controller
-              count: plants.length,
+              controller: controller.pageController,
+              count: controller.plants.length,
               effect: ExpandingDotsEffect(
                 dotWidth: 8.0,
                 dotHeight: 8.0,
                 expansionFactor: 2,
                 spacing: 12.0,
                 dotColor: Colors.grey,
-                activeDotColor: TColor.primary
+                activeDotColor: TColor.primary,
               ),
             ),
           ),
-
-
-          SizedBox(height: TSize.spaceBetweenSections,),
-
+          SizedBox(height: TSize.spaceBetweenSections),
           Obx(() {
-            final plant = plants[controller.currentPage.value.toInt()];
+            if (controller.plants.isEmpty || controller.currentPage.value.toInt() >= controller.plants.length) {
+              return SizedBox.shrink();
+            }
+            final plant = controller.plants[controller.currentPage.value.toInt()];
             return PlantCareTracker(plant: plant);
           }),
+        ],
+      ),
+    );
+  }
+}
+class MyGardenSkeleton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Column(
+        children: [
+          // Skeleton for PageView (replace with BoxSkeleton)
+          SizedBox(
+            height: TDeviceUtil.getScreenHeight() * 0.35,
+            child: ListView.builder(
+              itemCount: 3,
+              itemBuilder: (context, index) {
+                return BoxSkeleton(
+                  height: 180,
+                  width: double.infinity,
+                );
+              },
+            ),
+          ),
+
+          SizedBox(
+            height: 20,
+            child: BoxSkeleton(
+              height: 8.0,
+              width: double.infinity,
+            ),
+          ),
+          SizedBox(height: TSize.spaceBetweenSections),
+
+          PlantCareTrackerSkeleton(),
         ],
       ),
     );
