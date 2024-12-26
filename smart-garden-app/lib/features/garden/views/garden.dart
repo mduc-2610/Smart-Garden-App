@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:smart_garden_app/common/widgets/buttons/main_button.dart';
 import 'package:smart_garden_app/common/widgets/misc/main_wrapper.dart';
 import 'package:smart_garden_app/common/widgets/skeleton/box_skeleton.dart';
 import 'package:smart_garden_app/features/garden/controllers/garden_controller.dart';
 import 'package:smart_garden_app/features/garden/views/widgets/plant_care_tracker.dart';
 import 'package:smart_garden_app/features/garden/views/widgets/plant_card.dart';
+import 'package:smart_garden_app/utils/constants/api_constants.dart';
 import 'package:smart_garden_app/utils/constants/enums.dart';
 import 'package:smart_garden_app/utils/device/device_utility.dart';
+import 'package:smart_garden_app/utils/helpers/helper_functions.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:smart_garden_app/utils/constants/colors.dart';
 import 'package:smart_garden_app/utils/constants/sizes.dart';
@@ -21,21 +25,28 @@ class MyGardenView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'My Gardens',
+          'My Garden',
           style: Get.theme.textTheme.headlineLarge,
         ),
         actions: const [
-          Icon(Icons.add),
+          // Icon(Icons.add),
         ],
       ),
       body: MainWrapper(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // MainButton(
+            //   onPressed: () async {
+            //     final prefs = await SharedPreferences.getInstance();
+            //     $print("Test ip ${prefs.getString(Constant.ESP32_IP_KEY)}");
+            //   },
+            //   text: "Test ip",
+            // ),
             const SizedBox(height: TSize.spaceBetweenSections),
             Obx(() {
               if (controller.isLoading.value) {
-                return const MyGardenSkeleton(); // Show skeleton while loading
+                return const MyGardenSkeleton();
               } else {
                 return controller.show.value == ItemLayout.grid
                     ? buildGrid(context, controller)
@@ -126,26 +137,9 @@ class MyGardenSkeleton extends StatelessWidget {
     return Expanded(
       child: Column(
         children: [
-          // Skeleton for PageView (replace with BoxSkeleton)
-          SizedBox(
+          BoxSkeleton(
             height: TDeviceUtil.getScreenHeight() * 0.35,
-            child: ListView.builder(
-              itemCount: 3,
-              itemBuilder: (context, index) {
-                return const BoxSkeleton(
-                  height: 180,
-                  width: double.infinity,
-                );
-              },
-            ),
-          ),
-
-          const SizedBox(
-            height: 20,
-            child: BoxSkeleton(
-              height: 8.0,
-              width: double.infinity,
-            ),
+            width: double.infinity,
           ),
           const SizedBox(height: TSize.spaceBetweenSections),
 

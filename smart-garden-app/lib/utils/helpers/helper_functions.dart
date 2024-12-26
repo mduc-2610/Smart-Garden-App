@@ -8,7 +8,7 @@ import 'package:smart_garden_app/utils/constants/enums.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+// import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:reflectable/mirrors.dart';
 import 'package:stack_trace/stack_trace.dart';
 
@@ -200,34 +200,34 @@ class THelperFunction {
     return result;
   }
 
-  static String getPhoneNumber(PhoneNumber phoneNumber, {
-    bool excludeZero = true,
-    bool excludePrefix = false,
-  }) {
-    String phoneNumberStr = phoneNumber.phoneNumber ?? "";
-    int dialCodeLength = phoneNumber.dialCode?.length ?? 0;
-
-    if (phoneNumberStr.length <= dialCodeLength) return "";
-
-    String numberPart = phoneNumberStr.substring(dialCodeLength);
-
-    if (excludeZero && numberPart.isNotEmpty && numberPart[0] == '0') {
-      numberPart = numberPart.substring(1);
-    }
-
-    if(excludePrefix == false) numberPart = (phoneNumber.dialCode ?? "") + numberPart;
-    return numberPart;
-  }
-
-  static String hidePhoneNumber(dynamic phoneNumber) {
-    String phoneNumberStr = (phoneNumber is PhoneNumber)
-        ? THelperFunction.getPhoneNumber(phoneNumber, excludePrefix: true)
-        : phoneNumber;
-    int length = phoneNumberStr.length;
-    String prefixVisiblePart =  phoneNumberStr.substring(0, (phoneNumber is PhoneNumber) ? 2 : 3);
-    String suffixVisiblePart = phoneNumberStr.substring(length - 3, length);
-    return '(${phoneNumber is PhoneNumber ? phoneNumber.dialCode : prefixVisiblePart}) ${(phoneNumber is PhoneNumber) ? prefixVisiblePart : ""} ***** $suffixVisiblePart';
-  }
+  // static String getPhoneNumber(PhoneNumber phoneNumber, {
+  //   bool excludeZero = true,
+  //   bool excludePrefix = false,
+  // }) {
+  //   String phoneNumberStr = phoneNumber.phoneNumber ?? "";
+  //   int dialCodeLength = phoneNumber.dialCode?.length ?? 0;
+  //
+  //   if (phoneNumberStr.length <= dialCodeLength) return "";
+  //
+  //   String numberPart = phoneNumberStr.substring(dialCodeLength);
+  //
+  //   if (excludeZero && numberPart.isNotEmpty && numberPart[0] == '0') {
+  //     numberPart = numberPart.substring(1);
+  //   }
+  //
+  //   if(excludePrefix == false) numberPart = (phoneNumber.dialCode ?? "") + numberPart;
+  //   return numberPart;
+  // }
+  //
+  // static String hidePhoneNumber(dynamic phoneNumber) {
+  //   String phoneNumberStr = (phoneNumber is PhoneNumber)
+  //       ? THelperFunction.getPhoneNumber(phoneNumber, excludePrefix: true)
+  //       : phoneNumber;
+  //   int length = phoneNumberStr.length;
+  //   String prefixVisiblePart =  phoneNumberStr.substring(0, (phoneNumber is PhoneNumber) ? 2 : 3);
+  //   String suffixVisiblePart = phoneNumberStr.substring(length - 3, length);
+  //   return '(${phoneNumber is PhoneNumber ? phoneNumber.dialCode : prefixVisiblePart}) ${(phoneNumber is PhoneNumber) ? prefixVisiblePart : ""} ***** $suffixVisiblePart';
+  // }
 
   static DateTime? parseToDateTime(dynamic date) {
     if (date is String) {

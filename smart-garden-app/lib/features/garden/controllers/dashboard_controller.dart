@@ -38,7 +38,7 @@ class DashboardController extends GetxController {
 
     try {
       final response = await http.post(
-        Uri.parse("${APIConstant.baseEsp32Url}/light"),
+        Uri.parse("${await APIConstant.buildBaseEsp32Url()}/light"),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -61,14 +61,17 @@ class DashboardController extends GetxController {
     isLedAuto.value = value;
 
     try {
+      String _x = "${await APIConstant.buildBaseEsp32Url()}/led/auto";
+      $print("Test url: ${_x}");
+
       final response = await http.post(
-        Uri.parse("${APIConstant.baseEsp32Url}/auto"),
+        Uri.parse("${await APIConstant.buildBaseEsp32Url()}/led/auto"),
         headers: {
           'Content-Type': 'application/json',
         },
         body: json.encode({
-          'valve_1': true,
-          'valve_2': true,
+          // 'valve_1': true,
+          // 'valve_2': true,
           'led': isLedAuto.value,
         }),
       );
@@ -124,7 +127,7 @@ class DashboardController extends GetxController {
 
   Future<void> fetchLightState() async {
     try {
-      final response = await http.get(Uri.parse("${APIConstant.baseEsp32Url}/light"));
+      final response = await http.get(Uri.parse("${await APIConstant.buildBaseEsp32Url()}/light"));
       if (response.statusCode == 200) {
         final data = json.decode(response.body) as Map<String, dynamic>;
         $print("Light State $data ");
@@ -144,7 +147,7 @@ class DashboardController extends GetxController {
 
   Future<void> fetchLightAutoState() async {
     try {
-      final response = await http.get(Uri.parse("${APIConstant.baseEsp32Url}/auto"));
+      final response = await http.get(Uri.parse("${await APIConstant.buildBaseEsp32Url()}/led/auto"));
       if (response.statusCode == 200) {
         final data = json.decode(response.body) as Map<String, dynamic>;
         $print("Light Auto State $data ");

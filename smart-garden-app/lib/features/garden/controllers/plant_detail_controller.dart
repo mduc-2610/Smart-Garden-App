@@ -17,7 +17,7 @@ class PlantDetailController extends GetxController {
   var plant = Rx<Plant?>(null);
   String? plantId;
   Map<String, dynamic> autoState = {};
-
+  Map<String, dynamic> valveState = {};
   PlantDetailController();
 
   @override
@@ -25,20 +25,20 @@ class PlantDetailController extends GetxController {
     super.onInit();
     plantId = Get.arguments['id'];
     fetchValveState();
-    fetchPlantDetails();
-    fetchValveAutoState();
     startRealTimeUpdates();
+    fetchValveAutoState();
+    fetchPlantDetails();
   }
 
   Future<void> fetchPlantDetails() async {
     try {
-      $print("Hello");
       final response = await APIService<Plant>(
         fullUrl: '${APIConstant.baseCSUrl}/plant',
         allNoBearer: true,
       ).retrieve(plantId!);
       await Future.delayed(const Duration(milliseconds: TTime.init));
       plant.value = response;
+      isValveAuto.value = plant?.value?.isAuto ?? true;
         } catch (e) {
       print('Error fetching plant details: $e');
       Get.snackbar('Error', 'Failed to load plant data');
@@ -59,14 +59,15 @@ class PlantDetailController extends GetxController {
     isOpen.value = value;
 
     try {
+      valveState["valve_${plant?.value?.valve}"] = isOpen.value;
+
+      $print("Valve update: $valveState");
       final response = await http.post(
-        Uri.parse("${APIConstant.baseEsp32Url}/valve/${plant.value?.id}"),
+        Uri.parse("${await APIConstant.buildBaseEsp32Url()}/valve"),
         headers: {
           'Content-Type': 'application/json',
         },
-        body: json.encode({
-          'is_open': isOpen.value,
-        }),
+        body: json.encode(valveState),
       );
 
       if (response.statusCode == 200) {
@@ -95,19 +96,13 @@ class PlantDetailController extends GetxController {
     }
   }
 
-  void toggleValveAuto(bool value) async {
-    isValveAuto.value = value;
-
+  Future<bool> _updateValveAutoStateOnESP32(bool value, int valveNumber) async {
     try {
+      autoState["valve_${valveNumber}"] = value;
+      $print("Update state $autoState");
 
-      if(plant.value?.valve == 1) {
-        autoState['valve_1'] = isValveAuto.value;
-      }
-      else {
-        autoState['valve_2'] = isValveAuto.value;
-      }
       final response = await http.post(
-        Uri.parse("${APIConstant.baseEsp32Url}/auto"),
+        Uri.parse("${await APIConstant.buildBaseEsp32Url()}/valve/auto"),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -115,20 +110,43 @@ class PlantDetailController extends GetxController {
       );
 
       if (response.statusCode == 200) {
-        print("Auto valve state updated successfully");
+        print("Auto valve state updated successfully on ESP32");
+        return true;
       } else {
-        print('Error toggling auto valve: ${response.body}');
-        isValveAuto.value = !value;
-        Get.snackbar(
-          'Error',
-          'Failed to update auto valve state',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
-          colorText: Colors.white,
-        );
+        print('Error updating ESP32: ${response.body}');
+        return false;
       }
     } catch (e) {
-      print('Error toggling auto valve: $e');
+      print('Error updating ESP32: $e');
+      return false;
+    }
+  }
+
+  Future<bool> _updatePlantAutoState(Plant plant, bool value) async {
+    try {
+      plant.isAuto = value;
+      final response = await APIService<Plant>(allNoBearer: true).update(
+          plant.id,
+          plant
+      );
+
+      print(response);
+      return true;
+    } catch (e) {
+      print('Error updating plant: $e');
+      return false;
+    }
+  }
+
+  void toggleValveAuto(bool value) async {
+    isValveAuto.value = value;
+
+    final valveNumber = plant.value?.valve == 1 ? 1 : 2;
+
+    final esp32Success = await _updateValveAutoStateOnESP32(value, valveNumber);
+    final plantSuccess = await _updatePlantAutoState(plant.value!, value);
+
+    if (!esp32Success || !plantSuccess) {
       isValveAuto.value = !value;
       Get.snackbar(
         'Error',
@@ -143,16 +161,13 @@ class PlantDetailController extends GetxController {
   Future<void> fetchValveState() async {
     try {
       final response = await http.get(
-          Uri.parse("${APIConstant.baseEsp32Url}/valve/${plant.value?.id}")
+          Uri.parse("${await APIConstant.buildBaseEsp32Url()}/valve")
       );
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body) as Map<String, dynamic>;
-        if (data.containsKey('is_open')) {
-          isOpen.value = data['is_open'];
-        } else {
-          print('Invalid response structure: $data');
-        }
+        valveState = data;
+        $print("Valve init: $valveState");
       } else {
         print('Error fetching valve state: ${response.body}');
       }
@@ -164,12 +179,13 @@ class PlantDetailController extends GetxController {
   Future<void> fetchValveAutoState() async {
     try {
       final response = await http.get(
-          Uri.parse("${APIConstant.baseEsp32Url}/auto")
+          Uri.parse("${await APIConstant.buildBaseEsp32Url()}/valve/auto")
       );
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body) as Map<String, dynamic>;
         autoState = data;
+        $print("Init state $autoState");
       } else {
         print('Error fetching valve auto state: ${response.body}');
       }

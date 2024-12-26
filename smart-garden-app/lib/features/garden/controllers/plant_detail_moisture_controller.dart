@@ -15,7 +15,7 @@ class PlantDetailMoistureController extends GetxController {
   var startTime = 0.obs;
   var endTime = 24.obs;
   var selectedTimeFormat = 'HH:mm:ss'.obs;
-  int pageSize = 300;
+  int pageSize = 1000;
 
   PlantDetailMoistureController({required this.plant});
 
@@ -67,7 +67,7 @@ class PlantDetailMoistureController extends GetxController {
       isLoading.value = true;
       final date = selectedDate.value.toIso8601String().split('T')[0];
       final response = await APIService<Moisture>(
-        fullUrl: '${APIConstant.baseCSUrl}/moisture/?page_size=$pageSize&date=$date&start_time=${startTime.value}&end_time=${endTime.value}&order=asc&plant_id=${plant.id}',
+        fullUrl: '${APIConstant.baseCSUrl}/moisture/?plant_id=${plant?.id}page_size=$pageSize&date=$date&start_time=${startTime.value}&end_time=${endTime.value}&order=asc&plant_id=${plant.id}',
         allNoBearer: true,
       ).list();
 

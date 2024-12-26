@@ -11,6 +11,7 @@ import 'package:get/get.dart';
 import 'package:smart_garden_app/features/garden/views/widgets/plant_care_tracker.dart';
 import 'package:smart_garden_app/utils/constants/sizes.dart';
 import 'package:smart_garden_app/utils/device/device_utility.dart';
+import 'package:smart_garden_app/utils/helpers/helper_functions.dart';
 
 
 class PlantDetail extends StatelessWidget {
@@ -19,13 +20,13 @@ class PlantDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(PlantDetailController());
-
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Get.isDarkMode ? TColor.light : TColor.dark),
           onPressed: () {
+            $print('okokokokok');
             Get.back();
           },
         ),
@@ -76,7 +77,11 @@ class PlantDetail extends StatelessWidget {
                           flex: 2,
                           child: Card(
                             child: Padding(
-                              padding: EdgeInsets.all(16),
+                              padding: EdgeInsets.only(
+                                top: 16,
+                                bottom: 16,
+                                left: 8,
+                              ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -220,7 +225,6 @@ class PlantDetailSkeleton extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            // InfoRow skeletons for Sun, Water, Temp, etc.
                             BoxSkeleton(height: 18, width: 200, borderRadius: TSize.borderRadiusSm),
                             SizedBox(height: TSize.spaceBetweenItemsSm),
                             BoxSkeleton(height: 18, width: 200, borderRadius: TSize.borderRadiusSm),

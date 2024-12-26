@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_garden_app/common/widgets/buttons/main_button.dart';
 import 'package:smart_garden_app/features/garden/models/Dht11.dart';
 import 'package:smart_garden_app/features/garden/views/widgets/info_card.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:smart_garden_app/utils/constants/api_constants.dart';
 import 'package:smart_garden_app/utils/device/device_utility.dart';
+import 'package:smart_garden_app/utils/helpers/helper_functions.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:smart_garden_app/common/widgets/misc/main_wrapper.dart';
 import 'package:smart_garden_app/features/garden/controllers/dashboard_controller.dart';
@@ -30,12 +33,11 @@ class DashboardView extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: SizedBox(
-          height: TDeviceUtil.getScreenHeight(),
+          height: TDeviceUtil.getScreenHeight() * 1.2,
           child: MainWrapper(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Filter Section
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

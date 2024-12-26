@@ -8,12 +8,12 @@ class Plant {
   final String? name;
   final String? description;
   final DateTime? createdAt;
-  final bool? isAuto;
   final String? imageUrl;
   final int? waterDaysPerWeek;
   final int? plantDays;
   final int? lightPercentPerDay;
   final int? valve;
+  bool? isAuto;
   String? startTime;
   String? durationTime;
   Map<String, bool>? wateringDays;

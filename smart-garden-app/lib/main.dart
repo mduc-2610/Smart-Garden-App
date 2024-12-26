@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:smart_garden_app/features/garden/garden_menu_redirection.dart';
+import 'package:smart_garden_app/features/onboarding/views/onboarding.dart';
 import 'package:smart_garden_app/main.reflectable.dart';
 import 'package:smart_garden_app/utils/theme/theme.dart';
 import 'package:get/get.dart';
@@ -34,7 +35,7 @@ class _MyAppState extends State<MyApp> {
       darkTheme: TAppTheme.darkTheme,
       themeMode: ThemeMode.light,
       // home: RegistrationFirstStepView(),
-      home: const GardenMenuRedirection(),
+      home: OnboardingScreen(),
     );
   }
 }

@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:smart_garden_app/utils/constants/colors.dart';
 import 'package:smart_garden_app/utils/constants/image_strings.dart';
 import 'package:smart_garden_app/utils/constants/sizes.dart';
+import 'package:smart_garden_app/utils/device/device_utility.dart';
 import 'package:smart_garden_app/utils/helpers/helper_functions.dart';
 
 class PlantCard extends StatelessWidget {
@@ -73,7 +74,7 @@ class PlantCard extends StatelessWidget {
                   ),
                   const SizedBox(height: TSize.spaceBetweenItemsVertical),
                   SizedBox(
-                    height: 200,
+                    height: TDeviceUtil.getScreenHeight() * 0.19,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(TSize.borderRadiusLg),
                       child: Image.network(

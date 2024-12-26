@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:smart_garden_app/features/garden/garden_menu_redirection.dart';
 
 class OnboardingController extends GetxController {
   var currentPage = 0.0.obs;
@@ -14,7 +15,7 @@ class OnboardingController extends GetxController {
           curve: Curves.easeInOut
       );
     } else {
-      Get.offAllNamed('/home');
+      Get.offAll(() => GardenMenuRedirection());
     }
   }
 

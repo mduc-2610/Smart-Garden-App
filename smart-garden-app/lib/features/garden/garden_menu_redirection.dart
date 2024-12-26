@@ -10,20 +10,20 @@ class GardenMenuRedirection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> viewList = [
-      const MyGardenView(),
       const DashboardView(),
+      const MyGardenView(),
       const AccountSettingsScreen(),
     ];
     return CMenuBar(
       iconList: const [
         {
+          "icon": Icons.dashboard,
+          "label": "Dashboard",
+        },
+        {
           "icon": Icons.water_drop_outlined,
           "label": "Garden",
 
-        },
-        {
-          "icon": Icons.dashboard,
-          "label": "Dashboard",
         },
         {
           "icon": Icons.person,

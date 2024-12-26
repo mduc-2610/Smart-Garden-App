@@ -33,7 +33,7 @@ dependencies:
   reflectable: ^4.0.9
   smooth_page_indicator: ^1.1.0
   flutter_svg: ^2.0.10+1
-  intl_phone_number_input: ^0.7.4
+#  intl_phone_number_input: ^0.7.4
   carousel_slider: ^4.2.1
   flutter_emoji: ^2.5.1
 #  flutter_swiper: ^1.1.6
@@ -42,41 +42,42 @@ dependencies:
   # Utility packages
   http: ^1.1.0
   intl: ^0.19.0
-  logger: ^2.0.1
-  url_launcher: ^6.1.12
-  dropdown_button2: ^2.1.0
   flutter_rating_bar: ^4.0.1
+  another_flushbar : ^1.10.28
   provider: ^6.1.2
-  google_maps_flutter: ^2.5.0
-  geocoding: ^2.0.0
-  fl_chart: ^0.68.0
-  timezone: ^0.9.0
-  json_annotation: ^4.9.0
-  another_flushbar: ^1.10.28
-  top_snackbar: ^0.0.6
-  shared_preferences: ^2.2.3
-  loading_indicator: ^3.1.1
-  shimmer: ^3.0.0
-  skeletonizer: ^1.4.2
-  image_picker: ^0.8.4+4
-  dio: ^4.0.6
-  connectivity_plus: ^3.0.3
-  flutter_polyline_points: ^2.1.0
-  loading_progress_indicator: any
-  geolocator: ^9.0.1
-  photo_view: ^0.14.0
-  timeago: ^3.7.0
-  video_player: ^2.5.0
-  chewie: ^1.2.2
-  build_runner: ^2.0.0
+#  logger: ^2.0.1
+#  url_launcher: ^6.1.12
+#  dropdown_button2: ^2.1.0
+
+#  google_maps_flutter: ^2.5.0
+#  geocoding: ^2.0.0
+#  fl_chart: ^0.68.0
+#  timezone: ^0.9.0
+#  json_annotation: ^4.9.0
+#  top_snackbar: ^0.0.6
+#  loading_indicator: ^3.1.1
+#  skeletonizer: ^1.4.2
+#  connectivity_plus: ^3.0.3
+#  flutter_polyline_points: ^2.1.0
+#  loading_progress_indicator: any
+#  geolocator: ^9.0.1
+#  photo_view: ^0.14.0
+#  timeago: ^3.7.0
+#  video_player: ^2.5.0
+#  chewie: ^1.2.2
 
   # Icons
+  image_picker: ^0.8.4+4
+  shared_preferences: ^2.2.3
+  shimmer: ^3.0.0
   iconsax: ^0.0.8
   cupertino_icons: ^1.0.2
-  flutter_google_maps_webservices: ^1.1.1
-  google_places_flutter: ^2.0.6
+#  flutter_google_maps_webservices: ^1.1.1
+#  google_places_flutter: ^2.0.6
 
   # State Management
+  dio: ^4.0.6
+  build_runner: ^2.0.0
   get: ^4.6.5
   get_storage: ^2.1.1
 

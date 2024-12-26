@@ -39,59 +39,66 @@ class OnboardingScreen extends StatelessWidget {
 
     final OnboardingController controller = Get.put(OnboardingController());
     return Scaffold(
-      body: Column(
-        children: [
-          Expanded(
-            child: PageView.builder(
-              controller: controller.pageController,
-              itemCount: pages.length,
-              onPageChanged: (index) {
-                controller.currentPage.value = index.toDouble();
-              },
-              itemBuilder: (context, index) {
-                final page = pages[index];
-                return Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Spacer(),
-                      Text(
-                        page["title"],
-                        style: Get.theme.textTheme.displayMedium
-                      ),
-                      Image.asset(
-                        page["image"],
-                        height: 350,
-                        fit: BoxFit.cover,
-                      ),
-                      const SizedBox(height: TSize.spaceBetweenItemsVertical),
-                      Center(
-                        child: Text(
-                          page["title2"],
-                          textAlign: TextAlign.center,
-                          style: Get.theme.textTheme.headlineMedium,
+      body: MainWrapper(
+        topMargin: TDeviceUtil.getScreenHeight() * 0.05,
+        leftMargin: TDeviceUtil.getScreenWidth() * 0.1,
+        rightMargin: TDeviceUtil.getScreenWidth() * 0.1,
+        child: Column(
+          children: [
+            Expanded(
+              child: PageView.builder(
+                controller: controller.pageController,
+                itemCount: pages.length,
+                onPageChanged: (index) {
+                  controller.currentPage.value = index.toDouble();
+                },
+                itemBuilder: (context, index) {
+                  final page = pages[index];
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 15
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Spacer(),
+                        Text(
+                          page["title"],
+                          style: Get.theme.textTheme.displayMedium
                         ),
-                      ),
-                      const SizedBox(height: TSize.spaceBetweenItemsSm),
-                      Text(
-                        page["description"],
-                        textAlign: TextAlign.center,
-                        style: Get.theme.textTheme.titleSmall,
-                      ),
-                      const Spacer(),
-                    ],
-                  ),
-                );
-              },
+                        Image.asset(
+                          page["image"],
+                          height: 350,
+                          fit: BoxFit.cover,
+                        ),
+                        const SizedBox(height: TSize.spaceBetweenItemsVertical),
+                        Center(
+                          child: Text(
+                            page["title2"],
+                            textAlign: TextAlign.center,
+                            style: Get.theme.textTheme.headlineMedium,
+                          ),
+                        ),
+                        const SizedBox(height: TSize.spaceBetweenItemsSm),
+                        // Text(
+                        //   page["description"],
+                        //   textAlign: TextAlign.center,
+                        //   style: Get.theme.textTheme.titleSmall,
+                        // ),
+                        const Spacer(),
+                      ],
+                    ),
+                  );
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       bottomNavigationBar: Obx(() => MainWrapper(
+        leftMargin: TDeviceUtil.getScreenWidth() * 0.1,
+        rightMargin: TDeviceUtil.getScreenWidth() * 0.1,
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

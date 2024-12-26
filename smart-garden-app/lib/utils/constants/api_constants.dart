@@ -1,5 +1,6 @@
 
 import 'dart:io';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_garden_app/features/garden/models/Dht11.dart';
 import 'package:smart_garden_app/features/garden/models/Light.dart';
 import 'package:smart_garden_app/features/garden/models/Moisture.dart';
@@ -27,10 +28,15 @@ Future<String> getLocalIpAddress() async {
 
 }
 
+class Constant {
+  static const String ESP32_IP_KEY = 'esp32_ip';
+
+}
+
 class APIConstant {
   // static const String ip = "192.168.1.71";
   static const String ip = "192.168.0.104";
-  static const String esp32Ip = "192.168.0.103";
+  static const String esp32Ip = "192.168.0.101";
   static const String tSecretAPIKey = "";
   // static const baseUrl = 'http://10.0.2.2:8000/api';
   // static const baseUrl = 'http://192.168.1.8:8000/api'; // VANSAU
@@ -53,6 +59,11 @@ class APIConstant {
       default:
         return 'order';
     }
+  }
+
+  static Future<String> buildBaseEsp32Url() async {
+    final prefs = await SharedPreferences.getInstance();
+    return "http://${prefs.getString(Constant.ESP32_IP_KEY)}/api/esp";
   }
 
   static String? getEndpointFor<T>() {

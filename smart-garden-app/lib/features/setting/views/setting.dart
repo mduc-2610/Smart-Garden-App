@@ -4,6 +4,7 @@ import 'package:smart_garden_app/features/setting/controllers/setting_controller
 import 'package:smart_garden_app/utils/constants/colors.dart';
 import 'package:smart_garden_app/utils/constants/sizes.dart';
 import 'package:get/get.dart';
+import 'package:smart_garden_app/utils/device/device_utility.dart';
 
 class AccountSettingsScreen extends StatelessWidget {
   const AccountSettingsScreen({super.key});
@@ -22,63 +23,106 @@ class AccountSettingsScreen extends StatelessWidget {
         ),
         elevation: 0,
       ),
-      body: MainWrapper(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: TSize.spaceBetweenSections),
+      body: SingleChildScrollView(
+        child: SizedBox(
+          height: TDeviceUtil.getScreenHeight(),
+          child: MainWrapper(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: TSize.spaceBetweenSections),
 
-            Text(
-              'Password & Backup',
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
-            const SizedBox(height: TSize.spaceBetweenItemsVertical),
-            _buildOptionTile(
-              context: context,
-              title: 'Change Password',
-              onTap: () {
-                // Handle Change Password tap
-              },
-            ),
-            const SizedBox(height: TSize.spaceBetweenItemsVertical),
-            _buildOptionTile(
-              context: context,
-              title: 'Set Backup Email',
-              onTap: () {
-                // Handle Set Backup Email tap
-              },
-            ),
-            const SizedBox(height: TSize.spaceBetweenItemsVertical),
-            _buildOptionTile(
-              context: context,
-              title: 'Change Personal Information',
-              onTap: () {
-                // Handle Change Personal Information tap
-              },
-            ),
-            const SizedBox(height: TSize.spaceBetweenSections),
+                Text(
+                  'Password & Backup',
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+                const SizedBox(height: TSize.spaceBetweenItemsVertical),
+                _buildOptionTile(
+                  context: context,
+                  title: 'Change Password',
+                  onTap: () {
+                    // Handle Change Password tap
+                  },
+                ),
+                const SizedBox(height: TSize.spaceBetweenItemsVertical),
+                _buildOptionTile(
+                  context: context,
+                  title: 'Set Backup Email',
+                  onTap: () {
+                    // Handle Set Backup Email tap
+                  },
+                ),
+                const SizedBox(height: TSize.spaceBetweenItemsVertical),
+                _buildOptionTile(
+                  context: context,
+                  title: 'Change Personal Information',
+                  onTap: () {
+                    // Handle Change Personal Information tap
+                  },
+                ),
+                const SizedBox(height: TSize.spaceBetweenSections),
 
-            // Settings Section
-            Text(
-              'Setting',
-              style: Theme.of(context).textTheme.headlineSmall,
+                // Settings Section
+                Text(
+                  'Setting',
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+                const SizedBox(height: 12),
+                _buildConnectedTile(
+                  context: context,
+                  icon: Icons.lightbulb,
+                  title: 'Dark Mode',
+                  isConnected: controller.isDarkMode.value,
+                  onToggle: controller.toggleDarkMode,
+                ),
+                _buildConnectedTile(
+                  context: context,
+                  icon: controller.isSoundEnabled.value ? Icons.volume_up_rounded : Icons.volume_off_rounded,
+                  title: 'Sound',
+                  isConnected: controller.isSoundEnabled.value,
+                  onToggle: controller.toggleSound,
+                ),
+
+                const SizedBox(height: TSize.spaceBetweenSections),
+
+                Text(
+                  'Device Settings',
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
+                const SizedBox(height: TSize.spaceBetweenItemsVertical),
+                Card(
+                  elevation: TSize.cardElevationMd,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'ESP32 IP Address',
+                                style: Theme.of(context).textTheme.titleSmall,
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                controller.esp32IpAddress.value,
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
+                            ],
+                          ),
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.edit),
+                          onPressed: () => controller.showIpEditDialog(context),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(height: 12),
-            _buildConnectedTile(
-              context: context,
-              icon: Icons.lightbulb,
-              title: 'Dark Mode',
-              isConnected: controller.isDarkMode.value,
-              onToggle: controller.toggleDarkMode,
-            ),
-            _buildConnectedTile(
-              context: context,
-              icon: controller.isSoundEnabled.value ? Icons.volume_up_rounded : Icons.volume_off_rounded,
-              title: 'Sound',
-              isConnected: controller.isSoundEnabled.value,
-              onToggle: controller.toggleSound,
-            ),
-          ],
+          ),
         ),
       ),
     ));
