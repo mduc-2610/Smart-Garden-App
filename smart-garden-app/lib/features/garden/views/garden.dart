@@ -12,17 +12,19 @@ import 'package:smart_garden_app/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 
 class MyGardenView extends StatelessWidget {
-  final controller = Get.put(GardenController());
+
+  const MyGardenView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(GardenController());
     return Scaffold(
       appBar: AppBar(
         title: Text(
           'My Gardens',
           style: Get.theme.textTheme.headlineLarge,
         ),
-        actions: [
+        actions: const [
           Icon(Icons.add),
         ],
       ),
@@ -30,14 +32,14 @@ class MyGardenView extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: TSize.spaceBetweenSections),
+            const SizedBox(height: TSize.spaceBetweenSections),
             Obx(() {
               if (controller.isLoading.value) {
-                return MyGardenSkeleton(); // Show skeleton while loading
+                return const MyGardenSkeleton(); // Show skeleton while loading
               } else {
                 return controller.show.value == ItemLayout.grid
-                    ? buildGrid(context)
-                    : buildList(context);
+                    ? buildGrid(context, controller)
+                    : buildList(context, controller);
               }
             }),
           ],
@@ -46,7 +48,7 @@ class MyGardenView extends StatelessWidget {
     );
   }
 
-  Widget buildGrid(BuildContext context) {
+  Widget buildGrid(BuildContext context, GardenController controller) {
     return Expanded(
       child: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -64,7 +66,7 @@ class MyGardenView extends StatelessWidget {
     );
   }
 
-  Widget buildList(BuildContext context) {
+  Widget buildList(BuildContext context, GardenController controller) {
     return Expanded(
       child: Column(
         children: [
@@ -72,7 +74,7 @@ class MyGardenView extends StatelessWidget {
             height: TDeviceUtil.getScreenHeight() * 0.35,
             child: Obx(() {
               if (controller.plants.isEmpty) {
-                return Center(child: Text('No plants available'));
+                return const Center(child: Text('No plants available'));
               }
               return PageView.builder(
                 controller: controller.pageController,
@@ -93,7 +95,7 @@ class MyGardenView extends StatelessWidget {
             child: SmoothPageIndicator(
               controller: controller.pageController,
               count: controller.plants.length,
-              effect: ExpandingDotsEffect(
+              effect: const ExpandingDotsEffect(
                 dotWidth: 8.0,
                 dotHeight: 8.0,
                 expansionFactor: 2,
@@ -103,10 +105,10 @@ class MyGardenView extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: TSize.spaceBetweenSections),
+          const SizedBox(height: TSize.spaceBetweenSections),
           Obx(() {
             if (controller.plants.isEmpty || controller.currentPage.value.toInt() >= controller.plants.length) {
-              return SizedBox.shrink();
+              return const SizedBox.shrink();
             }
             final plant = controller.plants[controller.currentPage.value.toInt()];
             return PlantCareTracker(plant: plant);
@@ -117,6 +119,8 @@ class MyGardenView extends StatelessWidget {
   }
 }
 class MyGardenSkeleton extends StatelessWidget {
+  const MyGardenSkeleton({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -128,7 +132,7 @@ class MyGardenSkeleton extends StatelessWidget {
             child: ListView.builder(
               itemCount: 3,
               itemBuilder: (context, index) {
-                return BoxSkeleton(
+                return const BoxSkeleton(
                   height: 180,
                   width: double.infinity,
                 );
@@ -136,16 +140,16 @@ class MyGardenSkeleton extends StatelessWidget {
             ),
           ),
 
-          SizedBox(
+          const SizedBox(
             height: 20,
             child: BoxSkeleton(
               height: 8.0,
               width: double.infinity,
             ),
           ),
-          SizedBox(height: TSize.spaceBetweenSections),
+          const SizedBox(height: TSize.spaceBetweenSections),
 
-          PlantCareTrackerSkeleton(),
+          const PlantCareTrackerSkeleton(),
         ],
       ),
     );

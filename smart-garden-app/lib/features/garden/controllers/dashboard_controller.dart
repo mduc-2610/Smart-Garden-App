@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:smart_garden_app/features/garden/models/Dht11.dart';
 import 'package:smart_garden_app/data/services/api_service.dart';
 import 'package:smart_garden_app/utils/constants/api_constants.dart';
-import 'package:smart_garden_app/utils/constants/api_constants.dart';
 import 'package:smart_garden_app/utils/helpers/helper_functions.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -98,7 +97,7 @@ class DashboardController extends GetxController {
   }
 
   void startRealTimeUpdates() {
-    _timer = Timer.periodic(Duration(seconds: 10), (_) {
+    _timer = Timer.periodic(const Duration(seconds: 10), (_) {
       fetchHanoiWeather();
       if(isLedAuto.value) {
         fetchLightState();

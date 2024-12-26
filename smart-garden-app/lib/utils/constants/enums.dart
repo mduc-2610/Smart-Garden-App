@@ -9,3 +9,5 @@ enum ReviewType { food, restaurant, deliverer }
 enum Direction { vertical, horizontal }
 
 enum ItemLayout { grid, list }
+
+enum TimeFormat { HHMM, HHMMSS, MMSS, SS }

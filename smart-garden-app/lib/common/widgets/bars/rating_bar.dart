@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_garden_app/utils/constants/colors.dart';
 import 'package:smart_garden_app/utils/constants/sizes.dart';
-import 'package:smart_garden_app/utils/helpers/helper_functions.dart';
 
 class CRatingBar extends StatelessWidget {
   final String? prefixText;
@@ -27,7 +26,7 @@ class CRatingBar extends StatelessWidget {
             ),
           )
         ],
-        SizedBox(width: TSize.spaceBetweenItemsHorizontal,),
+        const SizedBox(width: TSize.spaceBetweenItemsHorizontal,),
 
         Expanded(
           flex: 2,

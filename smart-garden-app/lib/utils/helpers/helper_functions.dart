@@ -190,14 +190,13 @@ class THelperFunction {
         if (i != attributes.length - 1) {
           formattedString += ",";
         }
-        formattedString += "$endLine";
+        formattedString += endLine;
         i++;
       });
       formattedString += '}';
       return formattedString;
     }
-    String result = generate(className, attributes, prettyPrint: false)
-        + '\n' + generate(className, attributes, prettyPrint: true);
+    String result = '${generate(className, attributes, prettyPrint: false)}\n${generate(className, attributes, prettyPrint: true)}';
     return result;
   }
 
@@ -287,8 +286,7 @@ class THelperFunction {
       classMirror = classMirror.superclass;
     }
 
-    return _generate(className, attributes, prettyPrint: false) + '\n' +
-        _generate(className, attributes, prettyPrint: true);
+    return '${_generate(className, attributes, prettyPrint: false)}\n${_generate(className, attributes, prettyPrint: true)}';
   }
 
   static String _generate(String className, Map<String, dynamic> attributes, {bool prettyPrint = false}) {
@@ -301,7 +299,7 @@ class THelperFunction {
       if (i != attributes.length - 1) {
         formattedString += ",";
       }
-      formattedString += "$endLine";
+      formattedString += endLine;
       i++;
     });
     formattedString += '}';
@@ -325,11 +323,11 @@ class THelperFunction {
 
   static String formatNumber(int number) {
     if (number >= 1000000000) {
-      return (number / 1000000000).toStringAsFixed(1).replaceAll(RegExp(r'\.0$'), '') + 'b';
+      return '${(number / 1000000000).toStringAsFixed(1).replaceAll(RegExp(r'\.0$'), '')}b';
     } else if (number >= 1000000) {
-      return (number / 1000000).toStringAsFixed(1).replaceAll(RegExp(r'\.0$'), '') + 'm';
+      return '${(number / 1000000).toStringAsFixed(1).replaceAll(RegExp(r'\.0$'), '')}m';
     } else if (number >= 1000) {
-      return (number / 1000).toStringAsFixed(1).replaceAll(RegExp(r'\.0$'), '') + 'k';
+      return '${(number / 1000).toStringAsFixed(1).replaceAll(RegExp(r'\.0$'), '')}k';
     } else {
       return number.toString();
     }
@@ -371,7 +369,7 @@ class THelperFunction {
       future: _checkImageValidity(imageUrl),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator();
         } else if (snapshot.hasData && snapshot.data == true) {
           return ClipRRect(
             borderRadius: BorderRadius.circular(radius ?? 0),
@@ -426,7 +424,7 @@ class THelperFunction {
             return ClipRRect(
               borderRadius: BorderRadius.circular(radius ?? 0),
               child: Image.asset(
-                defaultAsset ?? TImage.hcBurger1,
+                defaultAsset ?? TImage.plant1,
                 width: width,
                 height: height,
                 fit: fit ?? BoxFit.cover,
@@ -451,7 +449,7 @@ class THelperFunction {
   static Future<bool> _checkImageValidity(String? imageUrl) async {
     if (imageUrl == null) return false;
     try {
-      final response = await NetworkImage(imageUrl).obtainKey(ImageConfiguration());
+      final response = await NetworkImage(imageUrl).obtainKey(const ImageConfiguration());
       return true;
     } catch (e) {
       return false;

@@ -12,9 +12,9 @@ class SkipButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      style: ButtonStyle().copyWith(
-          side: MaterialStatePropertyAll(BorderSide(width: 0, color: Colors.transparent)),
-          backgroundColor: MaterialStatePropertyAll(Colors.transparent)
+      style: const ButtonStyle().copyWith(
+          side: const WidgetStatePropertyAll(BorderSide(width: 0, color: Colors.transparent)),
+          backgroundColor: const WidgetStatePropertyAll(Colors.transparent)
       ),
       onPressed: onPressed,
       child: Text(

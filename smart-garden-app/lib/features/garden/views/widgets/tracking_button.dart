@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smart_garden_app/common/widgets/skeleton/box_skeleton.dart';
-import 'package:smart_garden_app/utils/constants/sizes.dart';
 import 'package:smart_garden_app/utils/constants/sizes.dart';
 
 class TrackingWidget extends StatelessWidget {
@@ -35,7 +33,7 @@ class TrackingWidget extends StatelessWidget {
           style: Get.theme.textTheme.headlineSmall,
         ),
 
-        SizedBox(height: TSize.spaceBetweenItemsVertical),
+        const SizedBox(height: TSize.spaceBetweenItemsVertical),
 
         InkWell(
           onTap: onPressed,
@@ -62,7 +60,7 @@ class TrackingWidget extends StatelessWidget {
           ),
         ),
 
-        SizedBox(height: TSize.spaceBetweenItemsVertical),
+        const SizedBox(height: TSize.spaceBetweenItemsVertical),
 
         Text(
           middleText,
@@ -85,7 +83,7 @@ class TrackingWidgetSkeleton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         BoxSkeleton(

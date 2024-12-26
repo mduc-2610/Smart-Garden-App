@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:smart_garden_app/data/services/api_service.dart';
-import 'package:smart_garden_app/data/services/token_service.dart';
 import 'package:smart_garden_app/features/authentication/models/account/user.dart';
 import 'package:smart_garden_app/features/authentication/models/auth/token.dart';
 import 'package:shared_preferences/shared_preferences.dart';

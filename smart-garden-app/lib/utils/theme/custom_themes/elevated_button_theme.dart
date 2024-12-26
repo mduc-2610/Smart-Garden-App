@@ -6,43 +6,43 @@ class TElevatedButtonTheme {
 
   static ElevatedButtonThemeData lightElevatedButtonTheme = ElevatedButtonThemeData(
     style: ButtonStyle(
-      elevation: MaterialStateProperty.all(0),
-      foregroundColor: MaterialStateProperty.all(Colors.white),
-      backgroundColor: MaterialStateProperty.resolveWith((states) {
-        if (states.contains(MaterialState.disabled)) {
+      elevation: WidgetStateProperty.all(0),
+      foregroundColor: WidgetStateProperty.all(Colors.white),
+      backgroundColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.disabled)) {
           return TColor.buttonDisabled;
         }
         return TColor.primary;
       }),
-      side: MaterialStateProperty.resolveWith((states) {
-        if (states.contains(MaterialState.disabled)) {
+      side: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.disabled)) {
           return BorderSide(color: TColor.buttonDisabled);
         }
-        return BorderSide(color: TColor.primary);
+        return const BorderSide(color: TColor.primary);
       }),
-      padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 18)),
-      textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+      padding: WidgetStateProperty.all(const EdgeInsets.symmetric(vertical: 18)),
+      textStyle: WidgetStateProperty.all(const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
     ),
   );
 
   static ElevatedButtonThemeData darkElevatedButtonTheme = ElevatedButtonThemeData(
     style: ButtonStyle(
-      elevation: MaterialStateProperty.all(0),
-      foregroundColor: MaterialStateProperty.all(Colors.white),
-      backgroundColor: MaterialStateProperty.resolveWith((states) {
-        if (states.contains(MaterialState.disabled)) {
+      elevation: WidgetStateProperty.all(0),
+      foregroundColor: WidgetStateProperty.all(Colors.white),
+      backgroundColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.disabled)) {
           return TColor.buttonDisabled;
         }
         return TColor.primary;
       }),
-      side: MaterialStateProperty.resolveWith((states) {
-        if (states.contains(MaterialState.disabled)) {
+      side: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.disabled)) {
           return BorderSide(color: TColor.buttonDisabled);
         }
-        return BorderSide(color: TColor.primary);
+        return const BorderSide(color: TColor.primary);
       }),
-      padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 18)),
-      textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+      padding: WidgetStateProperty.all(const EdgeInsets.symmetric(vertical: 18)),
+      textStyle: WidgetStateProperty.all(const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
     ),
   );
 }

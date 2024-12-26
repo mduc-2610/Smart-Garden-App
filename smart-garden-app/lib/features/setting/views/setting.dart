@@ -26,13 +26,13 @@ class AccountSettingsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: TSize.spaceBetweenSections),
+            const SizedBox(height: TSize.spaceBetweenSections),
 
             Text(
               'Password & Backup',
               style: Theme.of(context).textTheme.headlineSmall,
             ),
-            SizedBox(height: TSize.spaceBetweenItemsVertical),
+            const SizedBox(height: TSize.spaceBetweenItemsVertical),
             _buildOptionTile(
               context: context,
               title: 'Change Password',
@@ -40,7 +40,7 @@ class AccountSettingsScreen extends StatelessWidget {
                 // Handle Change Password tap
               },
             ),
-            SizedBox(height: TSize.spaceBetweenItemsVertical),
+            const SizedBox(height: TSize.spaceBetweenItemsVertical),
             _buildOptionTile(
               context: context,
               title: 'Set Backup Email',
@@ -48,7 +48,7 @@ class AccountSettingsScreen extends StatelessWidget {
                 // Handle Set Backup Email tap
               },
             ),
-            SizedBox(height: TSize.spaceBetweenItemsVertical),
+            const SizedBox(height: TSize.spaceBetweenItemsVertical),
             _buildOptionTile(
               context: context,
               title: 'Change Personal Information',
@@ -56,14 +56,14 @@ class AccountSettingsScreen extends StatelessWidget {
                 // Handle Change Personal Information tap
               },
             ),
-            SizedBox(height: TSize.spaceBetweenSections),
+            const SizedBox(height: TSize.spaceBetweenSections),
 
             // Settings Section
             Text(
               'Setting',
               style: Theme.of(context).textTheme.headlineSmall,
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             _buildConnectedTile(
               context: context,
               icon: Icons.lightbulb,
@@ -102,7 +102,7 @@ class AccountSettingsScreen extends StatelessWidget {
                   title,
                   style: Theme.of(context).textTheme.titleSmall
               ),
-              Icon(
+              const Icon(
                 Icons.arrow_forward_ios_rounded,
                 size: TSize.iconMd,
               ),
@@ -132,7 +132,7 @@ class AccountSettingsScreen extends StatelessWidget {
               color: TColor.primary,
               size: TSize.iconLg,
             ),
-            SizedBox(width: 12),
+            const SizedBox(width: 12),
             Expanded(
               child: Text(
                 title,

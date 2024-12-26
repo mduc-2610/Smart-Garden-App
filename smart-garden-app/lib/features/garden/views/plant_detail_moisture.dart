@@ -27,7 +27,7 @@ class PlantDetailMoistureView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Plant moisture history",
+          "${plant.name} moisture",
           // style: Get.textTheme.displaySmall?.copyWith(
           //   fontWeight: FontWeight.w700,
           // ),
@@ -42,7 +42,7 @@ class PlantDetailMoistureView extends StatelessWidget {
       body: MainWrapper(
         child: Column(
           children: [
-            SizedBox(height: TSize.spaceBetweenItemsVertical),
+            const SizedBox(height: TSize.spaceBetweenItemsVertical),
 
             Row(
               children: [
@@ -55,9 +55,9 @@ class PlantDetailMoistureView extends StatelessWidget {
                     decoration: InputDecoration(
                       labelText: 'Date',
                       labelStyle: Theme.of(context).textTheme.bodySmall,
-                      prefixIcon: Icon(Icons.calendar_today),
-                      suffixIcon: Icon(Icons.arrow_drop_down),
-                      border: OutlineInputBorder(),
+                      prefixIcon: const Icon(Icons.calendar_today),
+                      suffixIcon: const Icon(Icons.arrow_drop_down),
+                      border: const OutlineInputBorder(),
                     ),
                     onTap: () async {
                       final date = await showDatePicker(
@@ -74,7 +74,7 @@ class PlantDetailMoistureView extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: TSize.spaceBetweenItemsVertical),
+            const SizedBox(height: TSize.spaceBetweenItemsVertical),
         
             Row(
               children: [
@@ -93,7 +93,7 @@ class PlantDetailMoistureView extends StatelessWidget {
                     },
                   )),
                 ),
-                SizedBox(width: TSize.spaceBetweenItemsSm),
+                const SizedBox(width: TSize.spaceBetweenItemsSm),
                 Expanded(
                   child: Obx(() => DropdownButtonFormField<int>(
                     decoration: const InputDecoration(labelText: 'End Time'),
@@ -109,7 +109,7 @@ class PlantDetailMoistureView extends StatelessWidget {
                     },
                   )),
                 ),
-                SizedBox(width: TSize.spaceBetweenItemsSm),
+                const SizedBox(width: TSize.spaceBetweenItemsSm),
                 Expanded(
                   child: MainButton(
                     borderRadius: TSize.borderRadiusLg,
@@ -119,14 +119,14 @@ class PlantDetailMoistureView extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: TSize.spaceBetweenItemsVertical),
+            const SizedBox(height: TSize.spaceBetweenItemsVertical),
         
             Row(
               children: [
                 Expanded(
                   child: Obx(() => DropdownButtonFormField<String>(
                     value: controller.selectedTimeFormat.value,
-                    items: [
+                    items: const [
                       DropdownMenuItem(value: 'HH', child: Text('HH')),
                       DropdownMenuItem(value: 'HH:mm', child: Text('HH:mm')),
                       DropdownMenuItem(value: 'HH:mm:ss', child: Text('HH:mm:ss')),
@@ -138,7 +138,7 @@ class PlantDetailMoistureView extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: TSize.spaceBetweenItemsVertical),
+            const SizedBox(height: TSize.spaceBetweenItemsVertical),
         
             Obx(() {
               if (controller.isLoading.value) {
@@ -181,7 +181,7 @@ class PlantDetailMoistureView extends StatelessWidget {
                         size: 48,
                         color: Colors.grey[400],
                       ),
-                      SizedBox(height: TSize.spaceBetweenItemsSm),
+                      const SizedBox(height: TSize.spaceBetweenItemsSm),
                       Text(
                         'No Moisture Data Found',
                         style: Get.textTheme.titleMedium?.copyWith(
@@ -189,14 +189,14 @@ class PlantDetailMoistureView extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: TSize.spaceBetweenItemsSm),
+                      const SizedBox(height: TSize.spaceBetweenItemsSm),
                       Text(
                         'Try adjusting your filters or selecting a different date',
                         style: Get.textTheme.bodyMedium?.copyWith(
                           color: Colors.grey[600],
                         ),
                       ),
-                      SizedBox(height: TSize.spaceBetweenItemsMd),
+                      const SizedBox(height: TSize.spaceBetweenItemsMd),
                       SizedBox(
                         width: 150,
                         child: MainButton(
@@ -213,12 +213,12 @@ class PlantDetailMoistureView extends StatelessWidget {
                   ),
                 );
               } else {
-                return Container(
+                return SizedBox(
                   height: 250,
                   child: SfCartesianChart(
-                    legend: Legend(isVisible: true),
-                    primaryXAxis: CategoryAxis(),
-                    primaryYAxis: NumericAxis(
+                    legend: const Legend(isVisible: true),
+                    primaryXAxis: const CategoryAxis(),
+                    primaryYAxis: const NumericAxis(
                       minimum: 0,
                       maximum: 100,
                       title: AxisTitle(text: 'Moisture %'),

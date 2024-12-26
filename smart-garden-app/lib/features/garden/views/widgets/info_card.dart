@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_garden_app/utils/constants/colors.dart';
 import 'package:smart_garden_app/utils/constants/sizes.dart';
@@ -58,12 +57,12 @@ class InfoCard extends StatelessWidget {
                             size: TSize.iconLg,
                             color: color ?? TColor.primary,
                           ),
-                          SizedBox(height: TSize.spaceBetweenItemsSm),
+                          const SizedBox(height: TSize.spaceBetweenItemsSm),
                           Text(
                             title,
                             style: Get.textTheme.bodySmall?.copyWith(fontSize: 13),
                           ),
-                          SizedBox(height: TSize.spaceBetweenItemsSm),
+                          const SizedBox(height: TSize.spaceBetweenItemsSm),
                           if (!showSwitch) ...[
                             Text(
                               value,

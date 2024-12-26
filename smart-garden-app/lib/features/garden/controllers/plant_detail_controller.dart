@@ -16,6 +16,7 @@ class PlantDetailController extends GetxController {
   Timer? _timer;
   var plant = Rx<Plant?>(null);
   String? plantId;
+  Map<String, dynamic> autoState = {};
 
   PlantDetailController();
 
@@ -36,13 +37,9 @@ class PlantDetailController extends GetxController {
         fullUrl: '${APIConstant.baseCSUrl}/plant',
         allNoBearer: true,
       ).retrieve(plantId!);
-      await Future.delayed(Duration(milliseconds: TTime.init));
-      if (response != null) {
-        plant.value = response;
-      } else {
-        Get.snackbar('Error', 'Failed to load plant data');
-      }
-    } catch (e) {
+      await Future.delayed(const Duration(milliseconds: TTime.init));
+      plant.value = response;
+        } catch (e) {
       print('Error fetching plant details: $e');
       Get.snackbar('Error', 'Failed to load plant data');
     } finally {
@@ -51,7 +48,7 @@ class PlantDetailController extends GetxController {
   }
 
   void startRealTimeUpdates() {
-    _timer = Timer.periodic(Duration(seconds: 10), (_) {
+    _timer = Timer.periodic(const Duration(seconds: 10), (_) {
       if (isValveAuto.value) {
         fetchValveState();
       }
@@ -87,7 +84,6 @@ class PlantDetailController extends GetxController {
       }
     } catch (e) {
       print('Error toggling valve: $e');
-      // Revert the state if the request failed
       isOpen.value = !value;
       Get.snackbar(
         'Error',
@@ -103,14 +99,19 @@ class PlantDetailController extends GetxController {
     isValveAuto.value = value;
 
     try {
+
+      if(plant.value?.valve == 1) {
+        autoState['valve_1'] = isValveAuto.value;
+      }
+      else {
+        autoState['valve_2'] = isValveAuto.value;
+      }
       final response = await http.post(
         Uri.parse("${APIConstant.baseEsp32Url}/auto"),
         headers: {
           'Content-Type': 'application/json',
         },
-        body: json.encode({
-          'valve_${plant.value?.id}': isValveAuto.value,
-        }),
+        body: json.encode(autoState),
       );
 
       if (response.statusCode == 200) {
@@ -168,11 +169,7 @@ class PlantDetailController extends GetxController {
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body) as Map<String, dynamic>;
-        if (data.containsKey('valve_${plant.value?.id}')) {
-          isValveAuto.value = data['valve_${plant.value?.id}'];
-        } else {
-          print('Invalid response structure: $data');
-        }
+        autoState = data;
       } else {
         print('Error fetching valve auto state: ${response.body}');
       }

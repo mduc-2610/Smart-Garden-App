@@ -47,9 +47,9 @@ class CAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       centerTitle: centerTitle,
       leading: noLeading
-          ? SizedBox.shrink()
+          ? const SizedBox.shrink()
           : IconButton(
-        icon: Icon(Icons.arrow_back, color: Colors.black),
+        icon: const Icon(Icons.arrow_back, color: Colors.black),
         onPressed: () {
           backButtonOnPressed?.call();
           Get.back(result: result);

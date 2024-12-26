@@ -3,7 +3,6 @@ import 'package:smart_garden_app/common/controllers/bars/menu_bar_controller.dar
 import 'package:get/get.dart';
 import 'package:smart_garden_app/utils/constants/colors.dart';
 import 'package:smart_garden_app/utils/constants/sizes.dart';
-import 'package:smart_garden_app/utils/device/device_utility.dart';
 
 enum Menu { user, deliverer, restaurant }
 
@@ -13,7 +12,7 @@ class CMenuBar extends StatelessWidget {
   final double? iconSize;
   final String tag;
 
-  CMenuBar({
+  const CMenuBar({super.key, 
     required this.iconList,
     required this.viewList,
     this.iconSize,

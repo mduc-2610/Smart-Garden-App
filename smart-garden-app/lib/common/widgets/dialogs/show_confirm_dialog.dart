@@ -23,7 +23,7 @@ void showConfirmDialog(
     builder: (BuildContext context) {
       return AlertDialog(
         title: Text(
-          '${title ?? ''}',
+          title ?? '',
           style: titleTextStyle ?? Theme.of(context).textTheme.headlineSmall,
           textAlign: TextAlign.center,
         ),
@@ -35,9 +35,9 @@ void showConfirmDialog(
               height: 100,
               width: 100,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(
-              '${description ?? ''}',
+              description ?? '',
               style: descriptionTextStyle, // Apply custom or default text style
               textAlign: TextAlign.center,
             ),
@@ -49,18 +49,18 @@ void showConfirmDialog(
               Expanded(
                 child: SmallButton(
                   backgroundColor: declineButtonColor ?? TColor.reject,
-                  text: '${decline ?? 'No'}',
+                  text: decline ?? 'No',
                   onPressed: () {
                     Navigator.of(context).pop();
                     onDecline?.call();
                   },
                 ),
               ),
-              SizedBox(width: TSize.spaceBetweenItemsHorizontal),
+              const SizedBox(width: TSize.spaceBetweenItemsHorizontal),
               Expanded(
                 child: SmallButton(
                   backgroundColor: acceptButtonColor ?? TColor.success,
-                  text: '${accept ?? 'Yes'}',
+                  text: accept ?? 'Yes',
                   onPressed: () {
                     Navigator.of(context).pop();
                     onAccept?.call();

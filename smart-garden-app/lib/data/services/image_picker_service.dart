@@ -1,16 +1,15 @@
 
-import 'package:smart_garden_app/utils/helpers/helper_functions.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ImagePickerService {
   final ImagePicker _picker = ImagePicker();
 
   Future<List<XFile>> pickImages({int maxImages = 10}) async {
-    final List<XFile>? images = await _picker.pickMultiImage(
+    final List<XFile> images = await _picker.pickMultiImage(
       imageQuality: 85,
     );
 
-    if (images != null && images.length > maxImages) {
+    if (images.length > maxImages) {
       return images.sublist(0, maxImages);
     }
 

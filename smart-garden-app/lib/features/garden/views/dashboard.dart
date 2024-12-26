@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:smart_garden_app/common/widgets/buttons/main_button.dart';
-import 'package:smart_garden_app/common/widgets/buttons/small_button.dart';
 import 'package:smart_garden_app/features/garden/models/Dht11.dart';
 import 'package:smart_garden_app/features/garden/views/widgets/info_card.dart';
 import 'package:shimmer/shimmer.dart';
@@ -54,9 +53,9 @@ class DashboardView extends StatelessWidget {
                             decoration: InputDecoration(
                               labelText: 'Date',
                               labelStyle: Theme.of(context).textTheme.bodySmall,
-                              prefixIcon: Icon(Icons.calendar_today),
-                              suffixIcon: Icon(Icons.arrow_drop_down),
-                              border: OutlineInputBorder(),
+                              prefixIcon: const Icon(Icons.calendar_today),
+                              suffixIcon: const Icon(Icons.arrow_drop_down),
+                              border: const OutlineInputBorder(),
                             ),
                             onTap: () async {
                               final date = await showDatePicker(
@@ -130,7 +129,7 @@ class DashboardView extends StatelessWidget {
                     Expanded(
                       child: Obx(() => DropdownButtonFormField<String>(
                         value: controller.selectedTimeFormat.value,
-                        items: [
+                        items: const [
                           DropdownMenuItem(value: 'HH', child: Text('HH')),
                           DropdownMenuItem(value: 'HH:mm', child: Text('HH:mm')),
                           DropdownMenuItem(value: 'HH:mm:ss', child: Text('HH:mm:ss')),
@@ -218,12 +217,12 @@ class DashboardView extends StatelessWidget {
                       ),
                     );
                   } else {
-                    return Container(
+                    return SizedBox(
                       height: 250,
                       child: SfCartesianChart(
-                        legend: Legend(isVisible: true),
-                        primaryXAxis: CategoryAxis(),
-                        primaryYAxis: NumericAxis(),
+                        legend: const Legend(isVisible: true),
+                        primaryXAxis: const CategoryAxis(),
+                        primaryYAxis: const NumericAxis(),
                         series: <LineSeries<Dht11, String>>[
                           LineSeries<Dht11, String>(
                             name: 'Temperature',
@@ -263,19 +262,19 @@ class DashboardView extends StatelessWidget {
                         children: [
                           InfoCard(
                             title: "Humidity",
-                            value: "${controller.hanoiTemperature.value}",
+                            value: controller.hanoiTemperature.value,
                             icon: Icons.water_drop,
                             color: Colors.blue,
                           ),
                           InfoCard(
                             title: "Temperature",
-                            value: "${controller.hanoiHumidity.value}",
+                            value: controller.hanoiHumidity.value,
                             icon: Icons.thermostat,
                             color: Colors.red,
                           ),
                           InfoCard(
                             title: "Wind speed",
-                            value: "${controller.hanoiWindSpeed.value}",
+                            value: controller.hanoiWindSpeed.value,
                             icon: Icons.air,
                             color: Colors.green,
                           ),
@@ -328,7 +327,7 @@ class DashboardView extends StatelessWidget {
                       // ),
                       Row(
                         children: [
-                          InfoCard(
+                          const InfoCard(
                             flex: 1,
                             title: "Connectivity",
                             value: "Online",

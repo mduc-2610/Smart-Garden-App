@@ -7,7 +7,7 @@ class BoxSkeleton extends StatelessWidget {
   final double width;
   final double borderRadius;
 
-  const BoxSkeleton({
+  const BoxSkeleton({super.key, 
     required this.height,
     required this.width,
     this.borderRadius = TSize.borderRadiusLg,
@@ -26,6 +26,6 @@ class BoxSkeleton extends StatelessWidget {
             borderRadius: BorderRadius.circular(borderRadius),
           ),
         )
-    );;
+    );
   }
 }

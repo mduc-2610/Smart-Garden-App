@@ -1,5 +1,4 @@
 import 'package:smart_garden_app/data/services/reflect.dart';
-import 'package:smart_garden_app/features/authentication/models/account/user.dart';
 import 'package:smart_garden_app/utils/helpers/helper_functions.dart';
 
 @reflector

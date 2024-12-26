@@ -27,7 +27,7 @@ class AppBarScrollBehavior extends StatelessWidget {
           final deltaExtent = maxExtent - minExtent;
           final t =
           (1.0 - (currentExtent - minExtent) / deltaExtent)
-              .clamp(0.0, 1.0) as double;
+              .clamp(0.0, 1.0);
           final fadeStart = math.max(0.0, 1.0 - kToolbarHeight / deltaExtent);
           const fadeEnd = 1.0;
           final opacity = 1 - Interval(fadeStart, fadeEnd).transform(t);

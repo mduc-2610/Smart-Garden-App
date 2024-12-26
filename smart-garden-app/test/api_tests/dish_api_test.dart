@@ -17,7 +17,7 @@ void main() {
 
     test('Fetch dishes', () async {
       // Arrange
-      final responseBody = """[{
+      const responseBody = """[{
           "id": "1",
       "name": "draw",
       "description": "Information others record. Certain knowledge month consider check share big maybe.\nProduction per college how. Best cold show oil officer.",

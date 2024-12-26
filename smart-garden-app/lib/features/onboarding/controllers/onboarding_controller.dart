@@ -10,7 +10,7 @@ class OnboardingController extends GetxController {
       currentPage.value++;
       pageController.animateToPage(
           currentPage.value.toInt(),
-          duration: Duration(milliseconds: 300),
+          duration: const Duration(milliseconds: 300),
           curve: Curves.easeInOut
       );
     } else {
@@ -23,7 +23,7 @@ class OnboardingController extends GetxController {
       currentPage.value--;
       pageController.animateToPage(
           currentPage.value.toInt(),
-          duration: Duration(milliseconds: 300),
+          duration: const Duration(milliseconds: 300),
           curve: Curves.easeInOut
       );
     }

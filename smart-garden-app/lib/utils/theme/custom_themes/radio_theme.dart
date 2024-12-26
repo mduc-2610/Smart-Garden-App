@@ -5,7 +5,7 @@ class TRadioTheme {
   TRadioTheme._();
 
   static RadioThemeData radioTheme = RadioThemeData(
-    fillColor: MaterialStateProperty.all(
+    fillColor: WidgetStateProperty.all(
         TColor.primary
     ),
     visualDensity: const VisualDensity(

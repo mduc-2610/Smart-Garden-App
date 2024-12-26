@@ -37,7 +37,7 @@ dependencies:
   carousel_slider: ^4.2.1
   flutter_emoji: ^2.5.1
 #  flutter_swiper: ^1.1.6
-  syncfusion_flutter_charts: ^28.1.33
+  syncfusion_flutter_charts: ^28.1.36
 
   # Utility packages
   http: ^1.1.0

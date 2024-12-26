@@ -1,6 +1,4 @@
-import 'dart:math';
 
-import 'package:flutter/material.dart';
 import 'package:smart_garden_app/utils/device/device_utility.dart';
 
 class TSize {

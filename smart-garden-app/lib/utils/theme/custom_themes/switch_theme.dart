@@ -5,16 +5,16 @@ class TSwitchTheme {
   TSwitchTheme._();
 
   static final switchTheme = SwitchThemeData(
-    thumbColor: MaterialStateProperty.all(
+    thumbColor: WidgetStateProperty.all(
       TColor.light
     ),
-    trackColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
-      if (states.contains(MaterialState.selected)) {
+    trackColor: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+      if (states.contains(WidgetState.selected)) {
         return TColor.primary;
       }
       return TColor.textDesc;
     }),
-    trackOutlineColor: MaterialStateProperty.all(
+    trackOutlineColor: WidgetStateProperty.all(
       Colors.transparent
     )
   );

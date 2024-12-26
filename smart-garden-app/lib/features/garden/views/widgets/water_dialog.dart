@@ -1,25 +1,30 @@
-import 'package:flutter/cupertino.dart';
 import 'package:smart_garden_app/features/garden/controllers/water_dialog_controller.dart';
+import 'package:smart_garden_app/features/garden/models/Plant.dart';
 import 'package:smart_garden_app/features/garden/views/widgets/custom_time_picker.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_garden_app/common/widgets/buttons/small_button.dart';
+import 'package:smart_garden_app/utils/constants/enums.dart';
 import 'package:smart_garden_app/utils/constants/sizes.dart';
-import 'package:smart_garden_app/utils/helpers/helper_functions.dart';
 
 class WaterCustomizeDialog extends StatefulWidget {
+  final Plant? plant;
+  const WaterCustomizeDialog({
+    required this.plant,
+    super.key
+  });
+
   @override
   _WaterCustomizeDialogState createState() => _WaterCustomizeDialogState();
 }
 
 class _WaterCustomizeDialogState extends State<WaterCustomizeDialog> {
-  final ValueNotifier<bool> showStartTimeNotifier = ValueNotifier(false);
-  final ValueNotifier<bool> showEndTimeNotifier = ValueNotifier(false);
-
-  final controller = Get.put(WaterCustomizeController());
+  // final ValueNotifier<bool> showStartTimeNotifier = ValueNotifier(true);
+  // final ValueNotifier<bool> showPumpTimeNotifier = ValueNotifier(true);
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(WaterCustomizeController(plant: widget.plant), tag: "${widget.plant?.id}");
     return AlertDialog(
       title: Row(
         children: [
@@ -28,9 +33,9 @@ class _WaterCustomizeDialogState extends State<WaterCustomizeDialog> {
             style: Get.textTheme.headlineMedium,
             textAlign: TextAlign.center,
           ),
-          Spacer(),
+          const Spacer(),
           IconButton(
-            icon: Icon(Icons.close),
+            icon: const Icon(Icons.close),
             onPressed: () => Navigator.of(context).pop(),
           ),
         ],
@@ -39,55 +44,62 @@ class _WaterCustomizeDialogState extends State<WaterCustomizeDialog> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Default Settings',
-                  style: Get.textTheme.titleLarge,
-                ),
-                Switch(
-                  value: controller.defaultSettings,
-                  onChanged: (value) {
-                    setState(() {
-                      controller.defaultSettings = value;
-                    });
-                  },
-                ),
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     Text(
+            //       'Default Settings',
+            //       style: Get.textTheme.titleLarge,
+            //     ),
+            //     Switch(
+            //       value: controller.defaultSettings,
+            //       onChanged: (value) {
+            //         setState(() {
+            //           controller.defaultSettings = value;
+            //         });
+            //       },
+            //     ),
+            //   ],
+            // ),
             if (!controller.defaultSettings) ...[
-              SizedBox(height: TSize.spaceBetweenItemsVertical),
-              Text(
-                'Pump Timer (hours/day)',
-                style: Get.textTheme.titleLarge,
-              ),
-              Slider(
-                value: controller.pumpTimer,
-                min: 0,
-                max: 24,
-                divisions: 24,
-                label: controller.pumpTimer.toStringAsFixed(0),
-                onChanged: (value) {
-                  setState(() {
-                    controller.pumpTimer = value;
-                  });
-                },
-              ),
-              SizedBox(height: 10),
-              Text(
-                'Pump cycle',
-                style: Get.textTheme.titleLarge,
-              ),
-
-              PumpTimeRow(labelText: "On", unit: "(min)",),
-              SizedBox(height: TSize.spaceBetweenItemsVertical),
-              PumpTimeRow(labelText: "Rest", unit: "(hr)",),
-              SizedBox(height: TSize.spaceBetweenItemsVertical),
+              // const SizedBox(height: TSize.spaceBetweenItemsVertical),
+              // Text(
+              //   'Pump Timer (hours/day)',
+              //   style: Get.textTheme.titleLarge,
+              // ),
+              // Slider(
+              //   value: controller.pumpTimer,
+              //   min: 0,
+              //   max: 24,
+              //   divisions: 24,
+              //   label: controller.pumpTimer.toStringAsFixed(0),
+              //   onChanged: (value) {
+              //     setState(() {
+              //       controller.pumpTimer = value;
+              //     });
+              //   },
+              // ),
+              // const SizedBox(height: 10),
+              // Text(
+              //   'Pump cycle',
+              //   style: Get.textTheme.titleLarge,
+              // ),
+              //
+              // const PumpTimeRow(labelText: "On", unit: "(min)",),
+              // const SizedBox(height: TSize.spaceBetweenItemsVertical),
+              // const PumpTimeRow(labelText: "Rest", unit: "(hr)",),
+              // const SizedBox(height: TSize.spaceBetweenItemsVertical),
+             CustomTimePicker(
+               label: "Pump Time",
+               controller:  controller.pumpTimeController,
+               format: TimeFormat.MMSS,
+               showPeriod: false,
+             ),
 
              CustomTimePicker(
                 label: 'Start Time',
                 controller: controller.startTimeController,
+                format: TimeFormat.HHMM,
               ),
             ],
           ],
@@ -157,7 +169,7 @@ class _PumpTimeRowState extends State<PumpTimeRow> {
         Row(
           children: [
             Text(
-              "${widget.labelText}",
+              widget.labelText,
               style: Get.textTheme.bodyMedium,
             ),
             Text(
@@ -178,18 +190,18 @@ class _PumpTimeRowState extends State<PumpTimeRow> {
                     color: Colors.grey,
                   )
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.remove,
                   color: Colors.grey,
                 ),
               ),
             ),
-            SizedBox(width: TSize.spaceBetweenItemsHorizontal),
+            const SizedBox(width: TSize.spaceBetweenItemsHorizontal),
             Text(
               '$_currentValue',
-              style: TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16),
             ),
-            SizedBox(width: TSize.spaceBetweenItemsHorizontal),
+            const SizedBox(width: TSize.spaceBetweenItemsHorizontal),
             InkWell(
               onTap: _incrementValue,
               child: Container(
@@ -200,13 +212,13 @@ class _PumpTimeRowState extends State<PumpTimeRow> {
                     color: Colors.grey,
                   )
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.add,
                   color: Colors.grey,
                 ),
               ),
             ),
-            SizedBox(width: TSize.spaceBetweenItemsHorizontal),
+            const SizedBox(width: TSize.spaceBetweenItemsHorizontal),
           ],
         ),
       ],

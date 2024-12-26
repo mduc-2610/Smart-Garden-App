@@ -83,9 +83,9 @@ class TColor {
   static const Color cancel = Color(0xFF7f7e7c);
   static const Color reject = Color(0xFFD32F2F);
   static const Color complete = Colors.green;
-  static Color errorSnackBar = Color(0xFFFFCDD2);
+  static Color errorSnackBar = const Color(0xFFFFCDD2);
   static const Color infoSnackBar = Color(0xFFBBDEFB);
-  static const Color warningSnackBar = Color(0xFFFFFFF9C4);
+  static const Color warningSnackBar = Color(0xfffffff9c4);
   static const Color successSnackBar = Color(0xFFC8E6C9);
 
   // Icon Bg Color
@@ -95,7 +95,7 @@ class TColor {
   static const Color iconColor = Color(0xFFb7b8ba);
 
   //Gradient
-  static  Gradient linearGradient = LinearGradient(
+  static  Gradient linearGradient = const LinearGradient(
     begin: Alignment(0.0, 0.0),
     end: Alignment(0.707, -0.707),
     colors:[

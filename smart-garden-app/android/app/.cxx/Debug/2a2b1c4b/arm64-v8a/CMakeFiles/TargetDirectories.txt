@@ -1,0 +1,2 @@
+D:/4_projects/smart-garden-app/smart-garden-app/android/app/.cxx/Debug/2a2b1c4b/arm64-v8a/CMakeFiles/edit_cache.dir
+D:/4_projects/smart-garden-app/smart-garden-app/android/app/.cxx/Debug/2a2b1c4b/arm64-v8a/CMakeFiles/rebuild_cache.dir

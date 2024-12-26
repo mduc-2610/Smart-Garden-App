@@ -22,7 +22,7 @@ Future<void> showSuccessDialog(
         canPop: canPop,
         child: AlertDialog(
           content: Padding(
-            padding: EdgeInsets.all(TSize.sm),
+            padding: const EdgeInsets.all(TSize.sm),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -31,14 +31,14 @@ Future<void> showSuccessDialog(
                   style: Theme.of(context).textTheme.headlineMedium,
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(height: TSize.spaceBetweenSections),
+                const SizedBox(height: TSize.spaceBetweenSections),
 
                 if (image != null) ...[
                   Image.asset(
                     image,
                     width: TSize.imageDialogSize,
                   ),
-                  SizedBox(height: TSize.spaceBetweenSections),
+                  const SizedBox(height: TSize.spaceBetweenSections),
                 ],
 
                 Text(
@@ -46,14 +46,14 @@ Future<void> showSuccessDialog(
                   style: Theme.of(context).textTheme.headlineSmall,
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(height: TSize.spaceBetweenItemsVertical),
+                const SizedBox(height: TSize.spaceBetweenItemsVertical),
 
                 Text(
                   description,
                   style: Theme.of(context).textTheme.titleSmall,
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(height: TSize.spaceBetweenItemsVertical),
+                const SizedBox(height: TSize.spaceBetweenItemsVertical),
 
                 MainButton(
                   onPressed: () {

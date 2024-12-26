@@ -3,7 +3,6 @@ import 'package:smart_garden_app/common/widgets/buttons/small_button.dart';
 import 'package:smart_garden_app/common/widgets/misc/main_wrapper.dart';
 import 'package:smart_garden_app/common/widgets/skeleton/box_skeleton.dart';
 import 'package:smart_garden_app/features/garden/controllers/plant_detail_controller.dart';
-import 'package:smart_garden_app/features/garden/models/Plant.dart';
 import 'package:smart_garden_app/features/garden/views/plant_detail_moisture.dart';
 import 'package:smart_garden_app/features/garden/views/widgets/info_card.dart';
 import 'package:smart_garden_app/utils/constants/colors.dart';
@@ -13,23 +12,13 @@ import 'package:smart_garden_app/features/garden/views/widgets/plant_care_tracke
 import 'package:smart_garden_app/utils/constants/sizes.dart';
 import 'package:smart_garden_app/utils/device/device_utility.dart';
 
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:smart_garden_app/features/garden/controllers/plant_detail_controller.dart';
-import 'package:smart_garden_app/features/garden/models/Plant.dart';
-import 'package:smart_garden_app/features/garden/views/widgets/plant_care_tracker.dart';
-import 'package:smart_garden_app/common/widgets/buttons/small_button.dart';
-import 'package:smart_garden_app/features/garden/views/plant_detail_moisture.dart';
-import 'package:smart_garden_app/features/garden/views/widgets/info_card.dart';
-import 'package:smart_garden_app/utils/constants/sizes.dart';
-import 'package:smart_garden_app/utils/constants/image_strings.dart';
 
 class PlantDetail extends StatelessWidget {
   const PlantDetail({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(PlantDetailController()); // Access the controller
+    final controller = Get.put(PlantDetailController());
 
     return Scaffold(
       appBar: AppBar(
@@ -43,12 +32,10 @@ class PlantDetail extends StatelessWidget {
       ),
       body: Obx(
             () {
-          // Check if the plant data is still loading
           if (controller.isLoading.value) {
-            return PlantDetailSkeleton(); // Show skeleton while loading
+            return const PlantDetailSkeleton();
           }
 
-          // Once the plant data is loaded, display it
           final plant = controller.plant.value!;
           return SizedBox(
             height: TDeviceUtil.getScreenHeight(),
@@ -61,14 +48,14 @@ class PlantDetail extends StatelessWidget {
                       "${plant.name}",
                       style: Get.textTheme.displayMedium,
                     ),
-                    SizedBox(height: TSize.spaceBetweenItemsVertical),
+                    const SizedBox(height: TSize.spaceBetweenItemsVertical),
                     Text(
                       "Robust and dramatic, with no leaves.",
                       style: Get.textTheme.bodySmall,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    SizedBox(height: TSize.spaceBetweenItemsVertical),
+                    const SizedBox(height: TSize.spaceBetweenItemsVertical),
                     Row(
                       children: [
                         SizedBox(
@@ -82,10 +69,10 @@ class PlantDetail extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: TSize.spaceBetweenItemsVertical),
+                    const SizedBox(height: TSize.spaceBetweenItemsVertical),
                     Row(
                       children: [
-                        Expanded(
+                        const Expanded(
                           flex: 2,
                           child: Card(
                             child: Padding(
@@ -114,16 +101,17 @@ class PlantDetail extends StatelessWidget {
                             alignment: Alignment.center,
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(TSize.borderRadiusLg),
-                              child: Image.asset(
-                                TImage.plant1,
+                              child: Image.network(
+                                plant?.imageUrl ?? TImage.plant1,
                                 height: 150,
+                                fit: BoxFit.contain,
                               ),
                             ),
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(height: TSize.spaceBetweenItemsVertical),
+                    const SizedBox(height: TSize.spaceBetweenItemsVertical),
                     Row(
                       children: [
                         InfoCard(
@@ -136,7 +124,7 @@ class PlantDetail extends StatelessWidget {
                           onSwitchChanged: controller.toggleOpen,
                           disabled: controller.isValveAuto.value,
                         ),
-                        SizedBox(width: TSize.spaceBetweenItemsHorizontal,),
+                        const SizedBox(width: TSize.spaceBetweenItemsHorizontal,),
 
                         InfoCard(
                           title: "Valve auto",
@@ -149,7 +137,7 @@ class PlantDetail extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: TSize.spaceBetweenItemsVertical),
+                    const SizedBox(height: TSize.spaceBetweenItemsVertical),
                     PlantCareTracker(plant: plant,),
                   ],
                 ),
@@ -167,14 +155,14 @@ class InfoRow extends StatelessWidget {
   final IconData icon;
   final String text;
 
-  InfoRow({required this.icon, required this.text});
+  const InfoRow({super.key, required this.icon, required this.text});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Icon(icon, color: Colors.teal, size: 20),
-        SizedBox(width: TSize.spaceBetweenItemsHorizontal),
+        const SizedBox(width: TSize.spaceBetweenItemsHorizontal),
         Text(
           text,
           style: Get.theme.textTheme.titleMedium,
@@ -196,22 +184,22 @@ class PlantDetailSkeleton extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              BoxSkeleton(
+              const BoxSkeleton(
                 height: 50,
                 width: 200,
                 borderRadius: TSize.borderRadiusLg,
               ),
-              SizedBox(height: TSize.spaceBetweenItemsVertical),
-              SizedBox(height: TSize.spaceBetweenItemsVertical),
+              const SizedBox(height: TSize.spaceBetweenItemsVertical),
+              const SizedBox(height: TSize.spaceBetweenItemsVertical),
 
-              BoxSkeleton(
+              const BoxSkeleton(
                 height: 15,
                 width: 150,
                 borderRadius: TSize.borderRadiusSm,
               ),
-              SizedBox(height: TSize.spaceBetweenItemsVertical),
+              const SizedBox(height: TSize.spaceBetweenItemsVertical),
 
-              Row(
+              const Row(
                 children: [
                   BoxSkeleton(
                     width: 200,
@@ -220,11 +208,11 @@ class PlantDetailSkeleton extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: TSize.spaceBetweenItemsVertical),
+              const SizedBox(height: TSize.spaceBetweenItemsVertical),
 
               Row(
                 children: [
-                  Expanded(
+                  const Expanded(
                     flex: 2,
                     child: Card(
                       child: Padding(
@@ -248,7 +236,7 @@ class PlantDetailSkeleton extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(width: TSize.spaceBetweenItemsMd),
+                  const SizedBox(width: TSize.spaceBetweenItemsMd),
 
                   Expanded(
                     flex: 1,
@@ -256,7 +244,7 @@ class PlantDetailSkeleton extends StatelessWidget {
                       alignment: Alignment.center,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(TSize.borderRadiusLg),
-                        child: BoxSkeleton(
+                        child: const BoxSkeleton(
                           height: 150,
                           width: 150,
                           borderRadius: TSize.borderRadiusLg,
@@ -266,9 +254,9 @@ class PlantDetailSkeleton extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: TSize.spaceBetweenItemsVertical),
+              const SizedBox(height: TSize.spaceBetweenItemsVertical),
 
-              Row(
+              const Row(
                 children: [
                   Expanded(
                     flex: 1,
@@ -281,11 +269,11 @@ class PlantDetailSkeleton extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: TSize.spaceBetweenItemsVertical),
-              SizedBox(height: TSize.spaceBetweenItemsVertical),
+              const SizedBox(height: TSize.spaceBetweenItemsVertical),
+              const SizedBox(height: TSize.spaceBetweenItemsVertical),
 
               // Plant Care Tracker Skeleton
-              PlantCareTrackerSkeleton(direction: Axis.horizontal),
+              const PlantCareTrackerSkeleton(direction: Axis.horizontal),
             ],
           ),
         ),
@@ -299,9 +287,9 @@ class InfoCardSkeleton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return const Card(
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

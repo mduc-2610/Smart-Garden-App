@@ -1,7 +1,17 @@
+import 'package:smart_garden_app/data/services/api_service.dart';
 import 'package:smart_garden_app/features/garden/controllers/time_controller.dart';
 import 'package:get/get.dart';
+import 'package:smart_garden_app/features/garden/models/Plant.dart';
+import 'package:smart_garden_app/utils/constants/api_constants.dart';
+import 'package:smart_garden_app/utils/constants/enums.dart';
+import 'package:smart_garden_app/utils/helpers/helper_functions.dart';
 
 class WaterCustomizeController extends GetxController {
+  static WaterCustomizeController get instance => Get.find();
+  final Plant? plant;
+
+  WaterCustomizeController({ required this.plant });
+
   final RxBool _defaultSettings = false.obs;
   bool get defaultSettings => _defaultSettings.value;
   set defaultSettings(bool value) => _defaultSettings.value = value;
@@ -18,13 +28,38 @@ class WaterCustomizeController extends GetxController {
   int get pumpRestHours => _pumpRestHours.value;
   set pumpRestHours(int value) => _pumpRestHours.value = value;
 
-  final TimeController startTimeController = Get.put(TimeController(), tag:"start");
-  final TimeController endTimeController = Get.put(TimeController(), tag:"end");
+  late final TimeController startTimeController;
+  late final TimeController pumpTimeController;
 
-  void saveSettings() {
+  @override
+  void onInit() {
+    super.onInit();
+    startTimeController = Get.put(TimeController(
+      timeString: plant?.startTime,
+      showTime: true
+    ), tag:"start_${plant?.id}");
+    pumpTimeController = Get.put(TimeController(
+        timeString: plant?.durationTime,
+        showTime: true
+    ), tag:"pump_${plant?.id}");
+  }
+
+  Future<void> saveSettings() async {
     // Implement save logic here
     print('Saving settings...');
-    print('Start Time: ${startTimeController.hour}:${startTimeController.minute.toString().padLeft(2, '0')} ${startTimeController.period}');
-    print('End Time: ${endTimeController.hour}:${endTimeController.minute.toString().padLeft(2, '0')} ${endTimeController.minute}');
+    print('Start Time: ${startTimeController.toResult(TimeFormat.HHMM, showPeriod: true)}');
+    print('End Time: ${pumpTimeController.toResult(TimeFormat.HHMMSS)}');
+
+    plant?.startTime = startTimeController.toResult(TimeFormat.HHMM, showPeriod: true);
+    plant?.durationTime = pumpTimeController.toResult(TimeFormat.HHMMSS);
+    $print(plant?.name);
+    $print(plant?.description);
+    $print(plant);
+    final response = await APIService<Plant>(
+        // fullUrl: '${APIConstant.baseCSUrl}/plant/${plant?.id}'
+      allNoBearer: true
+    ).update(plant?.id, plant);
+    $print('Response: $response');
+    Get.back();
   }
 }

@@ -22,9 +22,9 @@ class TextWithDotAnimation extends StatelessWidget {
         final dotCount = snapshot.data ?? 0;
         final dots = List.generate(dotCount, (_) => '.').join();
         return Text(
-          '${text}${dots}',
+          '$text$dots',
           textAlign: (center) ? TextAlign.center : TextAlign.start,
-          style: textStyle ?? TextStyle(
+          style: textStyle ?? const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 16,
             color: Colors.white,
@@ -39,7 +39,7 @@ class TextWithDotAnimation extends StatelessWidget {
     while (true) {
       yield dotCount;
       dotCount = (dotCount + 1) % interval;
-      await Future.delayed(Duration(milliseconds: 500));
+      await Future.delayed(const Duration(milliseconds: 500));
     }
   }
 }

@@ -30,12 +30,13 @@ class GardenController extends GetxController {
         allNoBearer: true,
       ).list();
       plants.value = response;
-      await Future.delayed(Duration(milliseconds: TTime.init));
+      await Future.delayed(const Duration(milliseconds: TTime.init));
     } catch (error) {
       print("Error fetching plants: $error");
     } finally {
       isLoading.value = false;
     }
+    update();
     // isLoading.value = false;
   }
 
@@ -48,7 +49,7 @@ class GardenController extends GetxController {
       currentPage.value++;
       pageController.animateToPage(
         currentPage.value.toInt(),
-        duration: Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
     } else {
@@ -61,7 +62,7 @@ class GardenController extends GetxController {
       currentPage.value--;
       pageController.animateToPage(
         currentPage.value.toInt(),
-        duration: Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
     }

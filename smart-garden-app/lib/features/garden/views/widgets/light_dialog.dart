@@ -1,15 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:smart_garden_app/features/garden/controllers/light_dialog_controller.dart';
-import 'package:smart_garden_app/features/garden/controllers/water_dialog_controller.dart';
 import 'package:smart_garden_app/features/garden/views/widgets/custom_time_picker.dart';
-import 'package:smart_garden_app/features/garden/views/widgets/water_dialog.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_garden_app/common/widgets/buttons/small_button.dart';
 import 'package:smart_garden_app/utils/constants/sizes.dart';
-import 'package:smart_garden_app/utils/helpers/helper_functions.dart';
 
 class LightDialog extends StatefulWidget {
+  const LightDialog({super.key});
+
   @override
   _LightDialogState createState() => _LightDialogState();
 }
@@ -30,9 +28,9 @@ class _LightDialogState extends State<LightDialog> {
             style: Get.textTheme.headlineMedium,
             textAlign: TextAlign.center,
           ),
-          Spacer(),
+          const Spacer(),
           IconButton(
-            icon: Icon(Icons.close),
+            icon: const Icon(Icons.close),
             onPressed: () => Navigator.of(context).pop(),
           ),
         ],
@@ -58,14 +56,14 @@ class _LightDialogState extends State<LightDialog> {
                 ),
               ],
             ),
-            SizedBox(height: TSize.spaceBetweenItemsVertical,),
+            const SizedBox(height: TSize.spaceBetweenItemsVertical,),
 
             if (!controller.defaultSettings) ...[
               CustomTimePicker(
                 label: 'Start Time',
                 controller: controller.startTimeController,
               ),
-              SizedBox(height: TSize.spaceBetweenItemsSm,),
+              const SizedBox(height: TSize.spaceBetweenItemsSm,),
 
               CustomTimePicker(
                 label: 'End Time',

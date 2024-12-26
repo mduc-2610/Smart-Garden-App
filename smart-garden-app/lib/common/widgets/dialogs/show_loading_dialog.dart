@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smart_garden_app/common/widgets/buttons/main_button.dart';
 import 'package:smart_garden_app/utils/constants/colors.dart';
-import 'package:smart_garden_app/utils/constants/sizes.dart';
 import 'package:smart_garden_app/utils/helpers/helper_functions.dart';
 import 'package:get/get.dart';
 
@@ -15,9 +13,9 @@ void openLoadingDialog(String text, String animation) {
         color: THelperFunction.isDarkMode(Get.context!) ? TColor.dark : TColor.light,
         width: double.infinity,
         height: double.infinity,
-        child: Column(
+        child: const Column(
           children: [
-            const SizedBox(height: 250,),
+            SizedBox(height: 250,),
 
           ]
         ),

@@ -1,6 +1,4 @@
 import 'package:reflectable/reflectable.dart';
-import 'package:reflectable/reflectable.dart';
-import 'package:smart_garden_app/utils/helpers/helper_functions.dart';
 
 class JsonSerializable extends Reflectable {
   const JsonSerializable()

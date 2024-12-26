@@ -8,6 +8,6 @@ class TimeOfDayRange {
 
   @override
   String toString() {
-    return "${start} - ${end}";
+    return "$start - $end";
   }
 }

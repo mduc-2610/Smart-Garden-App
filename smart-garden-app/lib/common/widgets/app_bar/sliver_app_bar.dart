@@ -38,7 +38,7 @@ class CSliverAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverPadding(
-      padding: EdgeInsets.only(bottom: TSize.spaceBetweenItemsVertical),
+      padding: const EdgeInsets.only(bottom: TSize.spaceBetweenItemsVertical),
       sliver: SliverAppBar(
         pinned: true,
         title: title is Widget
@@ -77,7 +77,7 @@ class CSliverAppBar extends StatelessWidget {
           child: CircleAvatar(
             backgroundColor: Colors.white,
             child: IconButton(
-              icon: Icon(Icons.arrow_back, color: Colors.black),
+              icon: const Icon(Icons.arrow_back, color: Colors.black),
                 onPressed: () {
                   backButtonOnPressed?.call();
                   Get.back(result: result);

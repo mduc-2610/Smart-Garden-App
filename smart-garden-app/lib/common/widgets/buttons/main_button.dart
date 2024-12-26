@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smart_garden_app/utils/constants/colors.dart';
 import 'package:smart_garden_app/utils/constants/sizes.dart';
-import 'package:smart_garden_app/utils/device/device_utility.dart';
 
 class MainButton extends StatelessWidget {
   final double? width;
@@ -132,14 +131,14 @@ class MainButton extends StatelessWidget {
                   : SvgPicture.asset(
                     prefixIconStr!
                   ),
-                SizedBox(width: TSize.spaceBetweenItemsHorizontal),
+                const SizedBox(width: TSize.spaceBetweenItemsHorizontal),
               ],
               Text(
                 text,
                 style: textStyle?.copyWith(color: textColor)
               ),
               if (suffixIcon != null || suffixIconStr != null) ...[
-                SizedBox(width: TSize.spaceBetweenItemsHorizontal),
+                const SizedBox(width: TSize.spaceBetweenItemsHorizontal),
                 (suffixIcon != null)
                     ? Icon(suffixIcon, color: suffixIconColor)
                     : SvgPicture.asset(

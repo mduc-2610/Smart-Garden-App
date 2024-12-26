@@ -7,7 +7,6 @@ import 'package:smart_garden_app/data/services/token_service.dart';
 import 'package:smart_garden_app/utils/helpers/helper_functions.dart';
 import 'package:http/http.dart' as http;
 import 'package:reflectable/reflectable.dart';
-import 'package:get/get.dart';
 
 class APIService<T> {
   final String? endpoint;
@@ -52,7 +51,7 @@ class APIService<T> {
   String url({dynamic id}) {
     String url = fullUrl.isNotEmpty
         ? fullUrl
-        : '${APIConstant.baseUrl}/${endpoint ?? APIConstant.getEndpointFor<T>() ?? ""}';
+        : '${APIConstant.baseCSUrl}/${endpoint ?? APIConstant.getEndpointFor<T>() ?? ""}';
 
     if (!checkParamExist(url) && !url.endsWith('/')) {
       url += '/';
@@ -112,7 +111,7 @@ class APIService<T> {
           Uri.parse(url_),
           headers: await _getHeaders(token),
         );
-        final _x = json.decode(utf8.decode(response.bodyBytes));
+        final x = json.decode(utf8.decode(response.bodyBytes));
         return fromJson(decodeMessage(response));
       }
     });
@@ -196,6 +195,7 @@ class APIService<T> {
         final body = isFormData
             ? requestData
             : json.encode(requestData);
+        $print(requestData);
 
         final response = patch
             ? await http.patch(Uri.parse(uri), headers: await _getHeaders(token, noBearer: noBearer), body: body)
@@ -266,7 +266,7 @@ class APIService<T> {
     Token? token = await TokenService.getToken();
     try {
       final response = await http.post(
-        Uri.parse('${await APIConstant.baseUrl}/account/refresh-token/'),
+        Uri.parse('${APIConstant.baseUrl}/account/refresh-token/'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({'refresh': token?.refresh}),
       );
@@ -277,7 +277,7 @@ class APIService<T> {
         await TokenService.saveToken(token!);
 
         final userResponse = await http.get(
-          Uri.parse('${await APIConstant.baseUrl}/account/user/me'),
+          Uri.parse('${APIConstant.baseUrl}/account/user/me'),
           headers: await _getHeaders(token),
         );
 

@@ -1,11 +1,9 @@
 
 import 'dart:io';
 import 'package:smart_garden_app/features/garden/models/Dht11.dart';
-import 'package:smart_garden_app/features/garden/models/Dht11.dart';
 import 'package:smart_garden_app/features/garden/models/Light.dart';
 import 'package:smart_garden_app/features/garden/models/Moisture.dart';
 import 'package:smart_garden_app/features/garden/models/Plant.dart';
-import 'package:smart_garden_app/utils/helpers/helper_functions.dart';
 
 Future<String> getLocalIpAddress() async {
   try {
@@ -40,8 +38,8 @@ class APIConstant {
   // static const baseUrl = 'http://192.168.0.103:8000/api'; // Tenda
   static const baseUrl = 'http://$ip:8000/api'; // Minh Duc 5g
   static const String baseEsp32Url = "http://$esp32Ip/api/esp";
-  // static const String baseCSUrl = "https://8zdnvn-3000.csb.app/api";
-  static const String baseCSUrl = 'http://$ip:3000/api';
+  static const String baseCSUrl = "https://8zdnvn-3000.csb.app/api";
+  // static const String baseCSUrl = 'http://$ip:3000/api';
   static const baseSocketUrl = 'ws://${APIConstant.ip}:8000/ws';
 
   // static Future<String> get ip async => await getLocalIpAddress();

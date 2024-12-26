@@ -5,7 +5,7 @@ import 'package:smart_garden_app/utils/constants/sizes.dart';
 class TCardTheme {
   TCardTheme._();
 
-  static CardTheme lightCardTheme = CardTheme(
+  static CardTheme lightCardTheme = const CardTheme(
     color: TColor.light,
     shadowColor: TColor.dark,
     surfaceTintColor: TColor.light,

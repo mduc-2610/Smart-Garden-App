@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:another_flushbar/flushbar.dart';
-import 'package:smart_garden_app/common/widgets/buttons/small_button.dart';
 import 'package:smart_garden_app/utils/constants/colors.dart';
 import 'package:smart_garden_app/utils/constants/enums.dart';
 import 'package:smart_garden_app/utils/constants/icon_strings.dart';
 import 'package:smart_garden_app/utils/constants/sizes.dart';
 import 'package:smart_garden_app/utils/device/device_utility.dart';
-import 'package:get/get.dart';
 
 class CSnackBar {
   static Flushbar? _currentFlushbar;

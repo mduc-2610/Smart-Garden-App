@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smart_garden_app/utils/constants/colors.dart';
-import 'package:smart_garden_app/utils/constants/icon_strings.dart';
 import 'package:smart_garden_app/utils/constants/sizes.dart';
 
 class CircleIconCard extends StatelessWidget {

@@ -7,7 +7,7 @@ class TDatePickerTheme {
   static DatePickerThemeData datePickerTheme = DatePickerThemeData(
     cancelButtonStyle: ButtonStyle(
       padding: WidgetStateProperty.all(
-        EdgeInsets.symmetric(
+        const EdgeInsets.symmetric(
           vertical: 0,
           horizontal: 0,
         )

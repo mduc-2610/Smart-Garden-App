@@ -14,7 +14,7 @@ class TFormatter {
     String hour = (second_ ~/ 3600).toString().padLeft(2, '0');
     String minute = ((second_ % 3600) ~/ 60).toString().padLeft(2, '0');
     int second = second_ % 60;
-    return "${hasHour ? hour + ":" : ""}${hasMinute ? minute + ":" : ""}:${second.toString().padLeft(2, '0')}";
+    return "${hasHour ? "$hour:" : ""}${hasMinute ? "$minute:" : ""}:${second.toString().padLeft(2, '0')}";
   }
 
 }

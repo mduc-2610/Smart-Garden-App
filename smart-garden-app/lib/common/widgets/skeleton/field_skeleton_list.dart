@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smart_garden_app/common/widgets/skeleton/box_skeleton.dart';
 import 'package:smart_garden_app/utils/constants/sizes.dart';
-import 'package:shimmer/shimmer.dart';
 
 class FieldSkeletonList extends StatelessWidget {
   final int length;
@@ -17,8 +16,8 @@ class FieldSkeletonList extends StatelessWidget {
       Column(
         children: [
           for(int i = 0; i < length; i++)...[
-            BoxSkeleton(height: 60, width: double.infinity),
-            if(i != length - 1) SizedBox(height: TSize.spaceBetweenInputFields,),
+            const BoxSkeleton(height: 60, width: double.infinity),
+            if(i != length - 1) const SizedBox(height: TSize.spaceBetweenInputFields,),
           ]
         ],
       );

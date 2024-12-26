@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:smart_garden_app/utils/constants/colors.dart';
 import 'package:smart_garden_app/utils/constants/image_strings.dart';
 import 'package:smart_garden_app/utils/constants/sizes.dart';
+import 'package:smart_garden_app/utils/helpers/helper_functions.dart';
 
 class PlantCard extends StatelessWidget {
   final Plant plant;
@@ -12,7 +13,7 @@ class PlantCard extends StatelessWidget {
   final Color? background;
   final VoidCallback? onPressed;
 
-  PlantCard({
+  const PlantCard({super.key, 
     required this.plant,
     this.width,
     this.background = const Color(0xffaeceb0),
@@ -27,13 +28,13 @@ class PlantCard extends StatelessWidget {
             ? TColor.light
             : TColor.dark;
       }
-      return Color(0xff577943);
+      return const Color(0xff577943);
     }
 
     return InkWell(
       onTap: onPressed ?? () {
-        Get.to(() => PlantDetail(), arguments: {
-          "id": plant?.id
+        Get.to(() => const PlantDetail(), arguments: {
+          "id": plant.id
         });
       },
       child: SizedBox(
@@ -45,7 +46,7 @@ class PlantCard extends StatelessWidget {
               : null,
           elevation: background == Colors.transparent ? 0 : null,
           child: Padding(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -54,13 +55,13 @@ class PlantCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        "${plant?.name}",
+                        "${plant.name}",
                         style: Get.theme.textTheme.headlineMedium?.copyWith(
-                          color: Color(0xff577943),
+                          color: const Color(0xff577943),
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      SizedBox(height: TSize.spaceBetweenItemsSm),
+                      const SizedBox(height: TSize.spaceBetweenItemsSm),
                       Text(
                         '5 days',
                         style: Get.theme.textTheme.titleLarge?.copyWith(
@@ -70,12 +71,15 @@ class PlantCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: TSize.spaceBetweenItemsVertical),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(TSize.borderRadiusLg),
-                    child: Image.asset(
-                      "${plant.imageUrl ?? TImage.plant1}",
-                      fit: BoxFit.cover,
+                  const SizedBox(height: TSize.spaceBetweenItemsVertical),
+                  SizedBox(
+                    height: 200,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(TSize.borderRadiusLg),
+                      child: Image.network(
+                        plant?.imageUrl ?? TImage.plant1,
+                        fit: BoxFit.contain,
+                      ),
                     ),
                   ),
                 ],
