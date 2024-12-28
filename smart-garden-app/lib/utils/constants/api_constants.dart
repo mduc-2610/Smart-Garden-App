@@ -36,7 +36,7 @@ class Constant {
 class APIConstant {
   // static const String ip = "192.168.1.71";
   static const String ip = "192.168.0.104";
-  static const String esp32Ip = "192.168.0.101";
+  static const String esp32Ip = "192.168.209.161";
   static const String tSecretAPIKey = "";
   // static const baseUrl = 'http://10.0.2.2:8000/api';
   // static const baseUrl = 'http://192.168.1.8:8000/api'; // VANSAU
@@ -63,7 +63,7 @@ class APIConstant {
 
   static Future<String> buildBaseEsp32Url() async {
     final prefs = await SharedPreferences.getInstance();
-    return "http://${prefs.getString(Constant.ESP32_IP_KEY)}/api/esp";
+    return "http://${prefs.getString(Constant.ESP32_IP_KEY) ?? "192.168.209.161"}/api/esp";
   }
 
   static String? getEndpointFor<T>() {
